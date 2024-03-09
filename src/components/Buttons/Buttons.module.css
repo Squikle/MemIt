@@ -1,0 +1,22 @@
+:root {
+  --color: hsl(235, 30%, 90%);
+  --color-hover: hsl(251, 80%, 80%);
+}
+
+.button {
+  cursor: pointer;
+}
+
+.button svg {
+  fill: var(--color);
+}
+
+.button svg:hover {
+  fill: var(--color-hover);
+  transition: fill 0.1s linear;
+}
+
+.button {
+  background: none;
+  border: none;
+}

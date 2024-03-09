@@ -1,0 +1,7 @@
+.wordsContainer {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wordsContainer > * {
+  margin: 20px;
+}
