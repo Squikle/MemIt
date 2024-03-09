@@ -24,11 +24,11 @@ export function LongCardSide({ text, image, isEditing, editTextRef }) {
     </div>
   );
 
-  const handleContentClick = () => {
+  const handleContentClick = (e) => {
     if (!isEditing) return;
 
     const input = editingRef.current?.lastChild;
-    if (input) {
+    if (input && e.target !== input && e.target !== editingRef.current) {
       const range = document.createRange();
       const sel = window.getSelection();
 

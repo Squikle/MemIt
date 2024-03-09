@@ -80,8 +80,17 @@ function LongCard({ termId }) {
     </svg>
   );
 
+  const handleCardClick = (e) => {
+    console.log(e.detail);
+    const isDoubleClick = e.detail >= 2;
+    if (isDoubleClick) {
+      setIsEditing(true);
+      window.getSelection().removeAllRanges();
+    }
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleCardClick}>
       <Modal
         onCancel={cancelRemoving}
         onConfirm={confirmRemoving}
