@@ -85,10 +85,25 @@ const slice = createSlice({
   reducers: {
     termUpdated: (terms, action) => {
       const index = terms.findIndex((bug) => bug.id === action.payload.id);
-      terms[index] = action.payload;
+      let updatingTerm = terms[index];
+      const updatedTerm = {
+        ...updatingTerm,
+        ...action.payload,
+        isNew: false,
+      };
+      terms[index] = updatedTerm;
     },
     termDeleted: (terms, action) => {
       return terms.filter((x) => x.id != action.payload);
+    },
+    emptyTermAdded: (terms, action) => {
+      terms.push({
+        id: (Math.max(...terms.map((x) => x.id)) + 1).toString(),
+        expression: "",
+        translation: "",
+        setId: action.payload.setId,
+        isNew: true,
+      });
     },
   },
   extraReducers: (builder) => {
@@ -98,6 +113,6 @@ const slice = createSlice({
   },
 });
 
-export const { termUpdated, termDeleted, termsSetDeleted } = slice.actions;
+export const { termUpdated, termDeleted, emptyTermAdded } = slice.actions;
 
 export default slice.reducer;

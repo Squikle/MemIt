@@ -8,11 +8,11 @@ import { termUpdated, termDeleted } from "../../store/terms";
 import { Modal } from "../Modal/Modal";
 
 function LongCard({ termId }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
   const term = useSelector((state) =>
     state.entities.terms.find((x) => x.id === termId)
   );
+  const [isEditing, setIsEditing] = useState(term.isNew);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const editExpressionRef = useRef();
   const editTranslationRef = useRef();

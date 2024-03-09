@@ -1,13 +1,33 @@
+:root {
+  --background-color: hsl(251, 31%, 35%);
+  --card-width: 800px;
+  --card-shadow: 0 0 50px 2px rgba(0, 0, 0, 0.254);
+  --border-radius: 5px;
+}
+
 * {
   box-sizing: border-box;
 }
 
-.card {
+.card,
+.placeholder {
   position: relative;
-  width: 800px;
-  background-color: hsl(251, 31%, 35%);
-  box-shadow: 0 0 50px 2px rgba(0, 0, 0, 0.254);
-  border-radius: 5px;
+  width: var(--card-width);
+  background-color: var(--background-color);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--border-radius);
+}
+
+.placeholder {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder .addButton {
+  opacity: 0.8;
+  display: inline;
 }
 
 .buttons {
@@ -61,7 +81,7 @@
 
 .cardContent::after {
   content: "";
-  background-color: hsl(235, 30%, 20%);
+  background-color: hsl(235, 30%, 20%, 0.4);
   width: 2px;
   height: 80%;
   position: absolute;
