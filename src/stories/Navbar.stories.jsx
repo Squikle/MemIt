@@ -8,8 +8,4 @@ export default {
   },
 };
 
-const Template = () => {
-  return <Navbar></Navbar>;
-};
-
-export const Primary = Template.bind({});
+export const Primary = {};

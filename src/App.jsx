@@ -2,7 +2,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { Navbar } from "./components/Navbar/Navbar";
 import { HomePage } from "./pages/HomePage";
 import { ProfilePage } from "./pages/ProfilePage";
-import { TermsSetPage } from "./pages/TermsSetPage";
+import { TermsSetsPage } from "./pages/TermsSetsPage";
 import { TermsSetsListPage } from "./pages/TermsSetsListPage";
 import { LoginPage } from "./pages/LoginPage";
 import { useEffect } from "react";
@@ -31,7 +31,7 @@ function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/profile" element={<ProfilePage />}></Route>
         <Route path="/sets" element={<TermsSetsListPage />}></Route>
-        <Route path="/sets/:termsSetId" element={<TermsSetPage />}></Route>
+        <Route path="/sets/:termsSetId" element={<TermsSetsPage />}></Route>
       </Routes>
     </>
   );

@@ -27,7 +27,6 @@ export function TermsSetCard({ termsSetId }) {
   const termsCount = useSelector((state) =>
     selectTermsFromSet(state, termsSetId)
   ).length;
-  console.log(termsCount);
   const dispatch = useDispatch();
 
   const handleDeleteClick = (e) => {
