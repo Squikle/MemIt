@@ -7,4 +7,9 @@
   color: white;
   display: flex;
   justify-content: center;
+  position: relative;
+}
+
+.content {
+  z-index: 50;
 }
