@@ -3,9 +3,8 @@ header {
   width: 100vw;
   height: 60px;
   padding: 25px;
-  box-shadow: 0 0 50px 15px rgba(0, 0, 0, 0.4);
   position: fixed;
-  z-index: 10;
+  z-index: 1000;
   top: 0;
 
   .headerContentLogo {
@@ -44,4 +43,23 @@ header {
       }
     }
   }
+}
+
+.backShadow,
+.frontShadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 60px;
+}
+
+.backShadow {
+  z-index: 10;
+  box-shadow: 0 0 50px 15px rgba(0, 0, 0, 0.3);
+}
+
+.frontShadow {
+  z-index: 1000;
+  box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.2);
 }

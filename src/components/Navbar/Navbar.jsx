@@ -40,16 +40,20 @@ export function Navbar() {
   );
 
   return (
-    <header>
-      <div className={styles.headerContent}>
-        <Link to="/" className={styles.headerContentLogo}>
-          Eminder
-        </Link>
+    <>
+      <div className={styles.backShadow}></div>
+      <div className={styles.frontShadow}></div>
+      <header>
+        <div className={styles.headerContent}>
+          <Link to="/" className={styles.headerContentLogo}>
+            Eminder
+          </Link>
 
-        <nav className={styles.headerContentNav}>
-          <ul>{authContext.authorized && authLinks}</ul>
-        </nav>
-      </div>
-    </header>
+          <nav className={styles.headerContentNav}>
+            <ul>{authContext.authorized && authLinks}</ul>
+          </nav>
+        </div>
+      </header>
+    </>
   );
 }
