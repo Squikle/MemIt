@@ -1,10 +1,11 @@
 import "./pageStyles.css";
 import { TermsSetsList } from "../components/TermsSetsList/TermsSetsList";
+import classname from "classname";
 
 export function TermsSetsListPage() {
   return (
     <main className="container">
-      <div className="content">
+      <div className={classname("content", "rollout")}>
         <div>
           <TermsSetsList></TermsSetsList>
         </div>

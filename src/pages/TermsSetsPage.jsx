@@ -13,7 +13,7 @@ export function TermsSetsPage() {
       <div className={classname(styles.backButton, styles.rollout)}>
         <GoBackButton size="4em" onClick={() => navigate(-1)}></GoBackButton>
       </div>
-      <div className="content">
+      <div className={classname("content", "rollout")}>
         <TermsSet termsSetId={termsSetId}></TermsSet>
       </div>
     </main>
