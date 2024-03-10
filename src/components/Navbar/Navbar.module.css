@@ -9,6 +9,9 @@ header {
 
   .headerContentLogo {
     text-decoration: none;
+    font-weight: 800;
+    font-size: 1.4em;
+    color: hsl(251, 60%, 90%);
   }
 
   .headerContent {

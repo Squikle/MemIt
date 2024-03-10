@@ -46,7 +46,7 @@ export function Navbar() {
       <header>
         <div className={styles.headerContent}>
           <Link to="/" className={styles.headerContentLogo}>
-            Eminder
+            <p>MemIt</p>
           </Link>
 
           <nav className={styles.headerContentNav}>
