@@ -1,15 +1,19 @@
 import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { FloppyDiskIcon } from "../Icons/FloppyDiskIcon";
+import classname from "classname";
+import styles from "./Buttons.module.css";
 
-function SaveButton({ size, onClick, style, ...props }) {
+function SaveButton({ size, onClick, iconClassName }) {
   return (
     <BaseButton
       size={size}
       onClick={onClick}
-      Icon={FloppyDiskIcon}
-      style={style}
-      {...props}
+      icon={
+        <FloppyDiskIcon
+          className={classname(iconClassName, styles.defaultIcon)}
+        ></FloppyDiskIcon>
+      }
     ></BaseButton>
   );
 }
@@ -17,7 +21,7 @@ function SaveButton({ size, onClick, style, ...props }) {
 SaveButton.propTypes = {
   size: PropTypes.string,
   onClick: PropTypes.func,
-  style: PropTypes.object,
+  iconClassName: PropTypes.string,
 };
 
 export default SaveButton;

@@ -1,23 +1,27 @@
 import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { CrossMarkIcon } from "../Icons/CrossMarkIcon";
+import classname from "classname";
+import styles from "./Buttons.module.css";
 
-function ConfirmButton({ size, onClick, style, ...props }) {
+function RejectButton({ size, onClick, iconClassName }) {
   return (
     <BaseButton
       size={size}
       onClick={onClick}
-      Icon={CrossMarkIcon}
-      style={style}
-      {...props}
+      icon={
+        <CrossMarkIcon
+          className={classname(iconClassName, styles.defaultIcon)}
+        ></CrossMarkIcon>
+      }
     ></BaseButton>
   );
 }
 
-ConfirmButton.propTypes = {
+RejectButton.propTypes = {
   size: PropTypes.string,
   onClick: PropTypes.func,
-  style: PropTypes.object,
+  iconClassName: PropTypes.string,
 };
 
-export default ConfirmButton;
+export default RejectButton;

@@ -1,15 +1,19 @@
 import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { CheckMarkIcon } from "../Icons/CheckMarkIcon";
+import classname from "classname";
+import styles from "./Buttons.module.css";
 
-function ConfirmButton({ size, onClick, style, ...props }) {
+function ConfirmButton({ size, onClick, iconClassName }) {
   return (
     <BaseButton
       size={size}
       onClick={onClick}
-      Icon={CheckMarkIcon}
-      style={style}
-      {...props}
+      icon={
+        <CheckMarkIcon
+          className={classname(iconClassName, styles.defaultIcon)}
+        ></CheckMarkIcon>
+      }
     ></BaseButton>
   );
 }
@@ -17,7 +21,7 @@ function ConfirmButton({ size, onClick, style, ...props }) {
 ConfirmButton.propTypes = {
   size: PropTypes.string,
   onClick: PropTypes.func,
-  style: PropTypes.object,
+  iconClassName: PropTypes.string,
 };
 
 export default ConfirmButton;

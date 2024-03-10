@@ -1,15 +1,19 @@
 import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { PencilIcon } from "../Icons/PencilIcon";
+import classname from "classname";
+import styles from "./Buttons.module.css";
 
-function EditButton({ size, onClick, style, ...props }) {
+function EditButton({ size, onClick, iconClassName }) {
   return (
     <BaseButton
       size={size}
       onClick={onClick}
-      Icon={PencilIcon}
-      style={style}
-      {...props}
+      icon={
+        <PencilIcon
+          className={classname(iconClassName, styles.defaultIcon)}
+        ></PencilIcon>
+      }
     ></BaseButton>
   );
 }
@@ -17,7 +21,7 @@ function EditButton({ size, onClick, style, ...props }) {
 EditButton.propTypes = {
   size: PropTypes.string,
   onClick: PropTypes.func,
-  style: PropTypes.object,
+  iconClassName: PropTypes.string,
 };
 
 export default EditButton;

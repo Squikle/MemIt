@@ -3,7 +3,7 @@ import BaseButton from "../BaseButton";
 import { FloppyDiskIcon } from "../../Icons/FloppyDiskIcon";
 import { PencilIcon } from "../../Icons/PencilIcon";
 
-function EditSaveButton({ size, onClick, style, isEditing, ...props }) {
+function EditSaveButton({ size, onClick, isEditing }) {
   const icon = isEditing ? FloppyDiskIcon : PencilIcon;
   const iconStyle = isEditing ? { margin: "1px 0 0 0" } : {};
   return (
@@ -11,9 +11,7 @@ function EditSaveButton({ size, onClick, style, isEditing, ...props }) {
       size={size}
       onClick={onClick}
       Icon={icon}
-      style={style}
       iconStyle={iconStyle}
-      {...props}
     ></BaseButton>
   );
 }

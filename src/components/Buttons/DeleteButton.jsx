@@ -1,15 +1,19 @@
 import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { TrashIcon } from "../Icons/TrashIcon";
+import classname from "classname";
+import styles from "./Buttons.module.css";
 
-function DeleteButton({ size, onClick, style, ...props }) {
+function DeleteButton({ size, onClick, iconClassName }) {
   return (
     <BaseButton
       size={size}
       onClick={onClick}
-      Icon={TrashIcon}
-      style={style}
-      {...props}
+      icon={
+        <TrashIcon
+          className={classname(iconClassName, styles.defaultIcon)}
+        ></TrashIcon>
+      }
     ></BaseButton>
   );
 }
@@ -17,7 +21,7 @@ function DeleteButton({ size, onClick, style, ...props }) {
 DeleteButton.propTypes = {
   size: PropTypes.string,
   onClick: PropTypes.func,
-  style: PropTypes.object,
+  iconClassName: PropTypes.string,
 };
 
 export default DeleteButton;

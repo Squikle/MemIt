@@ -36,9 +36,12 @@
   left: auto;
   z-index: 1;
   padding: 5px;
-  margin: 0;
   height: 25px;
   display: flex;
+}
+
+.buttons button {
+  margin-left: 5px;
 }
 
 .cardButton {

@@ -1,15 +1,19 @@
 import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { PlusIcon } from "../Icons/PlusIcon";
+import classname from "classname";
+import styles from "./Buttons.module.css";
 
-function AddButton({ size, onClick, style, ...props }) {
+function AddButton({ size, onClick, iconClassName }) {
   return (
     <BaseButton
       size={size}
       onClick={onClick}
-      Icon={PlusIcon}
-      style={style}
-      {...props}
+      icon={
+        <PlusIcon
+          className={classname(iconClassName, styles.defaultIcon)}
+        ></PlusIcon>
+      }
     ></BaseButton>
   );
 }
@@ -17,7 +21,7 @@ function AddButton({ size, onClick, style, ...props }) {
 AddButton.propTypes = {
   size: PropTypes.string,
   onClick: PropTypes.func,
-  style: PropTypes.object,
+  iconClassName: PropTypes.string,
 };
 
 export default AddButton;
