@@ -37,13 +37,18 @@ function LongCard({ termId }) {
     setIsEditing((x) => !x);
   };
 
+  const deleteCard = () => {
+    dispatch(termDeleted(termId));
+  };
+
   const handleRemoveClick = () => {
-    setIsDeleting(true);
+    if (term.isNew) deleteCard();
+    else setIsDeleting(true);
   };
 
   const confirmRemoving = () => {
     setIsDeleting(false);
-    dispatch(termDeleted(termId));
+    deleteCard();
   };
 
   const cancelRemoving = () => {
