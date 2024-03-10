@@ -56,25 +56,22 @@ const termsState = [
   },
   {
     id: "7",
-    expression:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et.",
-    translation: "переклад2",
+    expression: "1",
+    translation: "one",
     translationImage: trainImage,
     setId: "1",
   },
   {
     id: "8",
-    expression:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et.",
-    translation:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et.",
+    expression: "2",
+    translation: "two",
     translationImage: trainImage,
     setId: "1",
   },
   {
     id: "9",
-    expressionImage: trainImage,
-    translation: "train",
+    expression: "3",
+    translation: "three",
     setId: "1",
   },
 ];

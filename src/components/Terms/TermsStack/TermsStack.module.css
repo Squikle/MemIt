@@ -30,7 +30,7 @@
 .stackCard {
   position: absolute;
   transform-origin: center bottom;
-  transition: transform 0.3s ease-in-out; /* Add transition property */
+  transition: transform 0.3s ease-in-out;
 }
 
 .stackCard:nth-child(1).topCard:not(.fading) {
