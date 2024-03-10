@@ -11,7 +11,7 @@ function ConfirmButton({ size, onClick, iconClassName }) {
       onClick={onClick}
       icon={
         <CheckMarkIcon
-          className={classname(iconClassName, styles.defaultIcon)}
+          className={classname(styles.defaultIcon, iconClassName)}
         ></CheckMarkIcon>
       }
     ></BaseButton>

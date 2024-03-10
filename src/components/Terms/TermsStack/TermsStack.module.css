@@ -15,16 +15,41 @@
   filter: drop-shadow(2px 3px 10px rgba(0, 0, 0, 0.3));
 }
 
-.stackCard:first-child {
+.stackCard:nth-child(1):not(.fading) {
   --rotation-degrees: 3deg;
   animation: rotate ease-out 0.4s forwards;
   animation-delay: 0.1s;
 }
 
-.stackCard:nth-child(2) {
+.stackCard:nth-child(2):not(.fading) {
   --rotation-degrees: -2deg;
   animation: rotate ease-out 0.4s forwards;
   animation-delay: 0.1s;
+}
+
+.stackCard {
+  position: absolute;
+  transform-origin: center bottom;
+  transition: transform 0.3s ease-in-out; /* Add transition property */
+}
+
+.stackCard:nth-child(1).topCard:not(.fading) {
+  --from-rotation-degrees: 3deg;
+  animation: rotateBack ease-in-out 0.2s;
+}
+
+.stackCard:nth-child(2).topCard:not(.fading) {
+  --from-rotation-degrees: -2deg;
+  animation: rotateBack ease-in-out 0.2s;
+}
+
+@keyframes rotateBack {
+  0% {
+    transform: rotateZ(var(--from-rotation-degrees));
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
 }
 
 @keyframes rotate {
@@ -44,5 +69,39 @@
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+.buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+  width: 500px;
+}
+
+.rejectButton {
+  fill: rgb(222, 77, 77);
+  width: 3em;
+  height: 3em;
+}
+
+.confirmButton {
+  fill: rgb(123, 255, 123);
+  width: 3em;
+  height: 3em;
+}
+
+.fading {
+  --fly-distance: 400px;
+  --fly-rotation: 25deg;
+  animation: fadeOut ease-in 0.3s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(var(--fly-distance)) rotateZ(var(--fly-rotation));
   }
 }

@@ -11,7 +11,7 @@ function RejectButton({ size, onClick, iconClassName }) {
       onClick={onClick}
       icon={
         <CrossMarkIcon
-          className={classname(iconClassName, styles.defaultIcon)}
+          className={classname(styles.defaultIcon, iconClassName)}
         ></CrossMarkIcon>
       }
     ></BaseButton>
