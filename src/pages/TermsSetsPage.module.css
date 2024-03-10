@@ -17,3 +17,9 @@
 .rollout {
   animation: rollout ease-out 0.2s;
 }
+
+@media (max-width: 1250px) {
+  .backButton {
+    display: none;
+  }
+}
