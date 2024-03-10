@@ -36,7 +36,7 @@ export function TermsStack({ termsSetId }) {
         if (stack.length === 0) return stack;
         return stack.slice(0, -1);
       });
-    }, 300);
+    }, 200);
   };
 
   const defferTopCard = () => {
@@ -50,7 +50,7 @@ export function TermsStack({ termsSetId }) {
         setDefferedCards((cards) => [...cards, topCard]);
         return [...stack.slice(0, -1)];
       });
-    }, 300);
+    }, 200);
   };
 
   useEffect(() => {
