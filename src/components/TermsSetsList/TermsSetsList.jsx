@@ -13,7 +13,7 @@ export function TermsSetsList() {
         {termsSets.map((x) => {
           return (
             <li key={x.id}>
-              <Link to={`${x.id}`}>
+              <Link to={`/terms/${x.id}`}>
                 <TermsSetCard termsSetId={x.id}></TermsSetCard>
               </Link>
             </li>

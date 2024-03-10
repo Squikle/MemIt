@@ -31,6 +31,10 @@
   display: flex;
 }
 
+.buttons button {
+  margin-left: 5px;
+}
+
 .wordsCount {
   font-size: 0.7em;
   opacity: 0.5;

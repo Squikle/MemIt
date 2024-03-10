@@ -8,6 +8,8 @@ import ConfirmButton from "../Buttons/ConfirmButton";
 import RejectButton from "../Buttons/RejectButton";
 import DeleteButton from "../Buttons/DeleteButton";
 import { useState } from "react";
+import EditButton from "../Buttons/EditButton";
+import { useNavigate } from "react-router-dom";
 
 const selectTermsSet = createSelector(
   (state) => state.entities.termsSets,
@@ -28,6 +30,7 @@ export function TermsSetCard({ termsSetId }) {
     selectTermsFromSet(state, termsSetId)
   ).length;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDeleteClick = (e) => {
     setIsDeleting(true);
@@ -44,6 +47,11 @@ export function TermsSetCard({ termsSetId }) {
     e.preventDefault();
   };
 
+  const handleEditClick = (e) => {
+    navigate(`${termsSetId}`);
+    e.preventDefault();
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.content}>
@@ -57,13 +65,11 @@ export function TermsSetCard({ termsSetId }) {
           <DeleteButton onClick={handleDeleteClick}></DeleteButton>
         ) : (
           <>
-            <ConfirmButton
-              onClick={confirmRemoving}
-              style={{ paddingRight: "5px" }}
-            ></ConfirmButton>
+            <ConfirmButton onClick={confirmRemoving}></ConfirmButton>
             <RejectButton onClick={handleRejectDeleteClick}></RejectButton>
           </>
         )}
+        <EditButton onClick={handleEditClick} />
       </div>
     </div>
   );

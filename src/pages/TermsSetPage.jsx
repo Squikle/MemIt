@@ -1,10 +1,10 @@
-import styles from "./TermsSetsPage.module.css";
+import styles from "./TermsSetPage.module.css";
 import { TermsSet } from "../components/TermsSet/TermsSet";
 import { useNavigate, useParams } from "react-router-dom";
 import GoBackButton from "../components/Buttons/GoBackButton";
 import classname from "classname";
 
-export function TermsSetsPage() {
+export function TermsSetPage() {
   const { termsSetId } = useParams();
   const navigate = useNavigate();
 
