@@ -1,0 +1,48 @@
+.stack {
+  display: flex;
+  width: 500px;
+  height: 500px;
+  animation: drop ease-in-out 0.2s forwards;
+}
+
+.stackCard {
+  position: absolute;
+  transform-origin: center bottom;
+  transition: transform 0.3s ease-in-out;
+}
+
+.stackCard.dropShadow {
+  filter: drop-shadow(2px 3px 10px rgba(0, 0, 0, 0.3));
+}
+
+.stackCard:first-child {
+  --rotation-degrees: 3deg;
+  animation: rotate ease-out 0.4s forwards;
+  animation-delay: 0.1s;
+}
+
+.stackCard:nth-child(2) {
+  --rotation-degrees: -2deg;
+  animation: rotate ease-out 0.4s forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(var(--rotation-degrees));
+  }
+}
+
+@keyframes drop {
+  0% {
+    opacity: 0;
+    transform: scale(2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

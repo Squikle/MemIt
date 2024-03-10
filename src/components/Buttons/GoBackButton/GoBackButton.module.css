@@ -1,0 +1,26 @@
+.backButton {
+  position: fixed;
+  left: 50px;
+  top: 50%;
+  opacity: 50%;
+  z-index: 100;
+}
+
+@keyframes rollout {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.rollout {
+  animation: rollout ease-out 0.2s;
+}
+
+@media (max-width: 1050px) {
+  .wideScreenOnly {
+    display: none;
+  }
+}

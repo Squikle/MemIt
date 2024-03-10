@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
 import styles from "./TermCardSide.module.css";
+import classname from "classname";
 
-export function TermCardSide({ text, image }) {
+export function TermCardSide({ text, image, isActive }) {
   return (
-    <div className={styles.content}>
+    <div
+      className={classname(styles.content, { [styles.inactive]: !isActive })}
+    >
       {image && <img src={image}></img>}
       <div className={styles.text}>{text}</div>
     </div>
@@ -13,4 +16,5 @@ export function TermCardSide({ text, image }) {
 TermCardSide.propTypes = {
   text: PropTypes.node,
   image: PropTypes.string,
+  isActive: PropTypes.bool,
 };
