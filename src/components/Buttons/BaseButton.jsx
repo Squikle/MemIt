@@ -1,7 +1,7 @@
 import styles from "./Buttons.module.css";
 import PropTypes from "prop-types";
 
-function BaseButton({ size, onClick, Icon, style, ...props }) {
+function BaseButton({ size, onClick, style, Icon, iconStyle, ...props }) {
   const buttonSize = size || "1.3em";
 
   const buttonStyle = {
@@ -17,7 +17,7 @@ function BaseButton({ size, onClick, Icon, style, ...props }) {
       onClick={onClick}
       {...props}
     >
-      <Icon width={buttonSize} height={buttonSize}></Icon>
+      <Icon width={buttonSize} height={buttonSize} {...iconStyle}></Icon>
     </button>
   );
 }
@@ -27,6 +27,7 @@ BaseButton.propTypes = {
   onClick: PropTypes.func,
   style: PropTypes.object,
   Icon: PropTypes.elementType,
+  iconStyle: PropTypes.object,
 };
 
 export default BaseButton;

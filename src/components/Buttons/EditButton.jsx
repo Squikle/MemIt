@@ -1,23 +1,23 @@
 import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
-import { TrashIcon } from "../Icons/TrashIcon";
+import { PencilIcon } from "../Icons/PencilIcon";
 
-function DeleteButton({ size, onClick, style, ...props }) {
+function EditButton({ size, onClick, style, ...props }) {
   return (
     <BaseButton
       size={size}
       onClick={onClick}
-      Icon={TrashIcon}
+      Icon={PencilIcon}
       style={style}
       {...props}
     ></BaseButton>
   );
 }
 
-DeleteButton.propTypes = {
+EditButton.propTypes = {
   size: PropTypes.string,
   onClick: PropTypes.func,
   style: PropTypes.object,
 };
 
-export default DeleteButton;
+export default EditButton;
