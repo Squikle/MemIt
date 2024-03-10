@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import styles from "./TermsSet.module.css";
-import LongCard from "../LongCard/LongCard";
+import TermLongCard from "../../Terms/TermLongCard/TermLongCard";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
-import LongCardPlaceholder from "../LongCard/LongCardPlaceholder";
-import { emptyTermAdded } from "../../store/terms";
+import TermLongCardPlaceholder from "../../Terms/TermLongCard/TermLongCardPlaceholder";
+import { emptyTermAdded } from "../../../store/terms";
 import { useEffect, useRef, useState } from "react";
 
 const selectTerms = createSelector(
@@ -38,12 +38,12 @@ export function TermsSet({ termsSetId }) {
   return (
     <div className={styles.wordsContainer}>
       {terms.map((x) => {
-        return <LongCard key={x.id} termId={x.id}></LongCard>;
+        return <TermLongCard key={x.id} termId={x.id}></TermLongCard>;
       })}
       <div ref={placeHolderRef}>
-        <LongCardPlaceholder
+        <TermLongCardPlaceholder
           onTermCreating={handleAddClick}
-        ></LongCardPlaceholder>
+        ></TermLongCardPlaceholder>
       </div>
     </div>
   );

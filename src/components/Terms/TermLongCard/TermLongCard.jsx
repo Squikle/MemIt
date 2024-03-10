@@ -1,15 +1,15 @@
 import { useRef, useState } from "react";
-import styles from "./LongCard.module.css";
+import styles from "./TermLongCard.module.css";
 import PropTypes from "prop-types";
-import { LongCardSide } from "./LongCardSide";
+import { TermLongCardSide } from "./TermLongCardSide";
 import classname from "classname";
 import { useDispatch, useSelector } from "react-redux";
-import { termUpdated, termDeleted } from "../../store/terms";
-import { Modal } from "../Modal/Modal";
-import DeleteButton from "../Buttons/DeleteButton";
-import EditSaveButton from "../Buttons/EditSaveButton/EditSaveButton";
+import { termUpdated, termDeleted } from "../../../store/terms";
+import { Modal } from "../../Modal/Modal";
+import DeleteButton from "../../Buttons/DeleteButton";
+import EditSaveButton from "../../Buttons/EditSaveButton/EditSaveButton";
 
-function LongCard({ termId }) {
+function TermLongCard({ termId }) {
   const term = useSelector((state) =>
     state.entities.terms.find((x) => x.id === termId)
   );
@@ -95,25 +95,25 @@ function LongCard({ termId }) {
       </div>
 
       <div className={styles.cardContent}>
-        <LongCardSide
+        <TermLongCardSide
           text={term.expression}
           image={term.expressionImage}
           isEditing={isEditing}
           editTextRef={editExpressionRef}
-        ></LongCardSide>
-        <LongCardSide
+        ></TermLongCardSide>
+        <TermLongCardSide
           text={term.translation}
           image={term.translationImage}
           isEditing={isEditing}
           editTextRef={editTranslationRef}
-        ></LongCardSide>
+        ></TermLongCardSide>
       </div>
     </div>
   );
 }
 
-LongCard.propTypes = {
+TermLongCard.propTypes = {
   termId: PropTypes.string,
 };
 
-export default LongCard;
+export default TermLongCard;

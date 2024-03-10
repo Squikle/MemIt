@@ -1,5 +1,5 @@
 import "./pageStyles.css";
-import { TermsSetsList } from "../components/TermsSetsList/TermsSetsList";
+import { TermsSetsList } from "../components/Sets/TermsSetsList/TermsSetsList";
 import classname from "classname";
 
 export function TermsSetsListPage() {

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import styles from "./LongCardSide.module.css";
+import styles from "./TermLongCardSide.module.css";
 import { useId, useRef } from "react";
 
-export function LongCardSide({ text, image, isEditing, editTextRef }) {
+export function TermLongCardSide({ text, image, isEditing, editTextRef }) {
   const contentId = useId();
   const editingRef = useRef();
 
@@ -50,7 +50,7 @@ export function LongCardSide({ text, image, isEditing, editTextRef }) {
   );
 }
 
-LongCardSide.propTypes = {
+TermLongCardSide.propTypes = {
   text: PropTypes.node,
   image: PropTypes.string,
   isEditing: PropTypes.bool,

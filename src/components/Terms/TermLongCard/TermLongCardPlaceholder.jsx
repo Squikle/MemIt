@@ -1,9 +1,9 @@
 import classname from "classname";
-import styles from "./LongCard.module.css";
+import styles from "./TermLongCard.module.css";
 import PropTypes from "prop-types";
-import AddButton from "../Buttons/AddButton";
+import AddButton from "../../Buttons/AddButton";
 
-function LongCardPlaceholder({ onTermCreating }) {
+function TermLongCardPlaceholder({ onTermCreating }) {
   return (
     <div className={classname(styles.card, styles.placeholder)}>
       <div className={styles.addButton}>
@@ -13,9 +13,9 @@ function LongCardPlaceholder({ onTermCreating }) {
   );
 }
 
-LongCardPlaceholder.propTypes = {
+TermLongCardPlaceholder.propTypes = {
   termId: PropTypes.string,
   onTermCreating: PropTypes.func,
 };
 
-export default LongCardPlaceholder;
+export default TermLongCardPlaceholder;

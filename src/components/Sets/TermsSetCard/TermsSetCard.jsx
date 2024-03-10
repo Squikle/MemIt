@@ -3,12 +3,12 @@ import styles from "./TermsSetCard.module.css";
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import { termsSetDeleted } from "../../store/termsSets";
-import ConfirmButton from "../Buttons/ConfirmButton";
-import RejectButton from "../Buttons/RejectButton";
-import DeleteButton from "../Buttons/DeleteButton";
+import { termsSetDeleted } from "../../../store/termsSets";
+import ConfirmButton from "../../Buttons/ConfirmButton";
+import RejectButton from "../../Buttons/RejectButton";
+import DeleteButton from "../../Buttons/DeleteButton";
 import { useState } from "react";
-import EditButton from "../Buttons/EditButton";
+import EditButton from "../../Buttons/EditButton";
 import { useNavigate } from "react-router-dom";
 
 const selectTermsSet = createSelector(

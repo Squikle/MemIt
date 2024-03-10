@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import styles from "./CardSide.module.css";
+import styles from "./TermCardSide.module.css";
 
-export function CardSide({ text, image }) {
+export function TermCardSide({ text, image }) {
   return (
     <div className={styles.content}>
       {image && <img src={image}></img>}
@@ -10,7 +10,7 @@ export function CardSide({ text, image }) {
   );
 }
 
-CardSide.propTypes = {
+TermCardSide.propTypes = {
   text: PropTypes.node,
   image: PropTypes.string,
 };
