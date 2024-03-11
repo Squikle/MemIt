@@ -14,9 +14,19 @@ const selectTermsFromSet = createSelector(
   (terms, termsSetId) => terms.filter((x) => x.setId === termsSetId)
 );
 
+const cardStates = {
+  active: "active",
+  deferring: "deferring",
+  discarding: "discarding",
+};
+
 export function TermsStack({ termsSetId }) {
   const terms = useSelector((state) => selectTermsFromSet(state, termsSetId));
-  const [stack, setStack] = useState([...terms].reverse());
+  const [stack, setStack] = useState(
+    [...terms].reverse().map((x) => {
+      return { ...x, state: cardStates.active };
+    })
+  );
   const [defferedCards, setDefferedCards] = useState([]);
 
   const isDroppingShadow = (index) => {
@@ -29,7 +39,7 @@ export function TermsStack({ termsSetId }) {
   };
 
   const removeTopCard = () => {
-    setTopCardRemoving();
+    setTopCardDiscarding(cardStates.discarding);
 
     setTimeout(() => {
       setStack((stack) => {
@@ -40,13 +50,16 @@ export function TermsStack({ termsSetId }) {
   };
 
   const defferTopCard = () => {
-    setTopCardRemoving();
+    setTopCardDiscarding(cardStates.deferring);
 
     setTimeout(() => {
       setStack((stack) => {
         if (stack.length === 0) return stack;
 
-        const topCard = { ...stack[stack.length - 1], removing: false };
+        const topCard = {
+          ...stack[stack.length - 1],
+          state: cardStates.active,
+        };
         setDefferedCards((cards) => [...cards, topCard]);
         return [...stack.slice(0, -1)];
       });
@@ -60,19 +73,19 @@ export function TermsStack({ termsSetId }) {
     }
   }, [stack, defferedCards]);
 
-  const setTopCardRemoving = () => {
+  const setTopCardDiscarding = (state) => {
     setStack((stack) => {
       if (stack.length === 0) return stack;
 
-      const topCardIndex = getFirstNotRemovingCardIndex();
+      const topCardIndex = getFirstNotDiscardingCardIndex();
       if (topCardIndex === -1) {
         return stack;
       }
 
       const cardToUpdate = stack[topCardIndex];
-      const updatedCard = {
+      let updatedCard = {
         ...cardToUpdate,
-        removing: true,
+        state,
       };
       return [
         ...stack.slice(0, topCardIndex),
@@ -83,11 +96,11 @@ export function TermsStack({ termsSetId }) {
   };
 
   const isTopCard = (index) => {
-    return index === getFirstNotRemovingCardIndex();
+    return index === getFirstNotDiscardingCardIndex();
   };
 
-  const getFirstNotRemovingCardIndex = () => {
-    return stack.findLastIndex((x) => x.removing !== true);
+  const getFirstNotDiscardingCardIndex = () => {
+    return stack.findLastIndex((x) => x.state === cardStates.active);
   };
 
   return (
@@ -97,10 +110,9 @@ export function TermsStack({ termsSetId }) {
           return (
             <div
               key={x.id}
-              className={classname(styles.stackCard, {
+              className={classname(styles.stackCard, styles[x.state], {
                 [styles.dropShadow]: isTopCard(ind) || isDroppingShadow(ind),
                 [styles.topCard]: isTopCard(ind),
-                [styles.fading]: x.removing,
               })}
             >
               <TermCard
