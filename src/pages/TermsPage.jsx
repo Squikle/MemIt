@@ -34,7 +34,7 @@ export function TermsPage() {
         </div>
       </main>
       {
-        <div className={classname("dropShadow", { hidden: !stackFinished })}>
+        <div className={classname({ hidden: !stackFinished })}>
           <Confetti ref={confettiControl}></Confetti>
         </div>
       }
