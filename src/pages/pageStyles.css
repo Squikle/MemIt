@@ -34,3 +34,11 @@
 .rollout {
   animation: rollout ease-out 0.2s;
 }
+
+.hidden {
+  display: none;
+}
+
+.dropShadow {
+  filter: drop-shadow(2px 3px 10px rgba(0, 0, 0, 0.3));
+}

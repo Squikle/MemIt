@@ -20,7 +20,7 @@ const cardStates = {
   discarding: "discarding",
 };
 
-export function TermsStack({ termsSetId }) {
+export function TermsStack({ termsSetId, onStackFinished }) {
   const terms = useSelector((state) => selectTermsFromSet(state, termsSetId));
   const [stack, setStack] = useState(
     [...terms].reverse().map((x) => {
@@ -72,6 +72,12 @@ export function TermsStack({ termsSetId }) {
       setDefferedCards((cards) => [...cards.slice(1)]);
     }
   }, [stack, defferedCards]);
+
+  useEffect(() => {
+    if (stack.length === 0 && defferedCards.length === 0) {
+      onStackFinished();
+    }
+  }, [stack, defferedCards, onStackFinished]);
 
   const setTopCardDiscarding = (state) => {
     setStack((stack) => {
@@ -143,6 +149,7 @@ export function TermsStack({ termsSetId }) {
 
 TermsStack.propTypes = {
   termsSetId: PropTypes.string,
+  onStackFinished: PropTypes.func,
 };
 
 export default TermsStack;

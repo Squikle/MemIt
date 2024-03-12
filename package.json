@@ -14,6 +14,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@storybook/store": "^7.6.17",
+    "@tsparticles/react": "^3.0.0",
     "autoprefixer": "^10.4.16",
     "axios": "^1.5.1",
     "classname": "^0.0.0",
@@ -22,7 +23,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.3",
-    "react-router-dom": "^6.16.0"
+    "react-router-dom": "^6.16.0",
+    "tsparticles": "^3.3.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.17",
