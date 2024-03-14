@@ -1,4 +1,4 @@
-import { initParticlesEngine } from "@tsparticles/react";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadFull } from "tsparticles";
 import {
   useEffect,
@@ -9,7 +9,6 @@ import {
   useCallback,
 } from "react";
 import particlesOptions from "./particles.json";
-import Particles from "./Particles";
 
 const Confetti = forwardRef(function Confetti(_, ref) {
   const containerRef = useRef(null);
