@@ -1,4 +1,4 @@
-import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { initParticlesEngine } from "@tsparticles/react";
 import { loadFull } from "tsparticles";
 import {
   useEffect,
@@ -9,6 +9,7 @@ import {
   useCallback,
 } from "react";
 import particlesOptions from "./particles.json";
+import Particles from "./Particles";
 
 const Confetti = forwardRef(function Confetti(_, ref) {
   const containerRef = useRef(null);
@@ -26,12 +27,16 @@ const Confetti = forwardRef(function Confetti(_, ref) {
     });
   }, [init]);
 
-  const particlesLoaded = useCallback(
-    (container) => {
-      containerRef.current = container;
-    },
-    [containerRef]
-  );
+  useEffect(() => {
+    console.log("mount");
+    return () => console.log("unmount");
+  }, []);
+
+  const particlesLoaded = useCallback((container) => {
+    containerRef.current = container;
+    container._lifeTime = 123;
+    container._duration = undefined;
+  }, []);
 
   const pause = () => {
     containerRef?.current?.plugins
@@ -43,6 +48,13 @@ const Confetti = forwardRef(function Confetti(_, ref) {
       .get("emitters")
       .array.forEach((x) => x.play());
   };
+  const start = () => {
+    console.log(containerRef?.current);
+    console.log(containerRef?.current.destroyed);
+    console.log(containerRef?.current._duration);
+    console.log(containerRef?.current._lifeTime);
+    containerRef?.current?.play(true);
+  };
 
   useImperativeHandle(
     ref,
@@ -50,6 +62,7 @@ const Confetti = forwardRef(function Confetti(_, ref) {
       return {
         pause,
         play,
+        start,
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,13 +71,11 @@ const Confetti = forwardRef(function Confetti(_, ref) {
 
   return (
     <>
-      {init && (
-        <Particles
-          id="tsparticles"
-          particlesLoaded={particlesLoaded}
-          options={particlesOptions}
-        />
-      )}
+      <Particles
+        id="tsparticles"
+        particlesLoaded={particlesLoaded}
+        options={particlesOptions}
+      />
     </>
   );
 });
