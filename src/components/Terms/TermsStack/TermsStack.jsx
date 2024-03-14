@@ -134,12 +134,10 @@ export function TermsStack({ termsSetId, onStackFinished }) {
       <div className={styles.buttons}>
         <RejectButton
           iconClassName={classname(styles.rejectButton)}
-          size={"3em"}
           onClick={defferTopCard}
         ></RejectButton>
         <ConfirmButton
           iconClassName={classname(styles.confirmButton)}
-          size={"3em"}
           onClick={removeTopCard}
         ></ConfirmButton>
       </div>

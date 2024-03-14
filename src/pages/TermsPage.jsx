@@ -6,6 +6,8 @@ import classname from "classname";
 import style from "./Pages.module.css";
 import Confetti from "../components/Particles/Confetti";
 import { useRef, useState } from "react";
+import RestartButton from "../components/Buttons/RestartButton";
+import termsPageStyle from "./TermsPage.module.css";
 
 export function TermsPage() {
   const { termsSetId } = useParams();
@@ -13,12 +15,16 @@ export function TermsPage() {
   const confettiControl = useRef(null);
 
   const pauseConfetti = () => {
-    confettiControl.current.pause();
+    confettiControl.current?.pause();
+  };
+  const startConfetti = () => {
+    confettiControl.current?.start();
   };
 
   const handleStackFinished = () => {
     setStackFinished(true);
 
+    startConfetti();
     setTimeout(() => pauseConfetti(), 2000);
   };
 
@@ -31,13 +37,17 @@ export function TermsPage() {
             termsSetId={termsSetId}
             onStackFinished={handleStackFinished}
           ></TermsStack>
+          {stackFinished && (
+            <div className={classname(termsPageStyle.restart)}>
+              <RestartButton
+                iconClassName={classname(termsPageStyle.restartIcon)}
+                onClick={() => window.location.reload()}
+              ></RestartButton>
+            </div>
+          )}
         </div>
       </main>
-      {
-        <div className={classname({ hidden: !stackFinished })}>
-          <Confetti ref={confettiControl}></Confetti>
-        </div>
-      }
+      <Confetti ref={confettiControl}></Confetti>
     </>
   );
 }
