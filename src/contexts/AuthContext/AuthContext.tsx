@@ -1,5 +1,4 @@
 import {createContext, ReactNode, useState} from "react";
-import PropTypes from "prop-types";
 
 const STORAGE_KEY = "token";
 
@@ -42,8 +41,4 @@ export const AuthContextProvider = ({ children }: Props) => {
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
-};
-
-AuthContextProvider.propTypes = {
-  children: PropTypes.node,
 };

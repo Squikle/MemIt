@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "./TermCard.module.css";
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { TermCardSide } from "./TermCardSide.tsx";
 import classNames from "classnames";
@@ -15,8 +14,8 @@ type CardProps = {
 
 function TermCard({ termId, isActive, width, height }: CardProps) {
   const [isRevealed, setIsRevealed] = useState(false);
-  const term = useSelector<RootState>((state) =>
-    state.entities.terms.find((x) => x.id === termId)
+  const term = useSelector<RootState, Term>((state) =>
+    state.entities.terms.find((x) => x.id === termId)!
   );
 
   const flip = () => {
@@ -55,12 +54,5 @@ function TermCard({ termId, isActive, width, height }: CardProps) {
     </div>
   );
 }
-
-TermCard.propTypes = {
-  termId: PropTypes.string,
-  isActive: PropTypes.bool,
-  width: PropTypes.string,
-  height: PropTypes.string,
-};
 
 export default TermCard;

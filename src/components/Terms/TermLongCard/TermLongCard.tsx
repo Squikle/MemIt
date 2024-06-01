@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import styles from "./TermLongCard.module.css";
-import PropTypes from "prop-types";
 import { TermLongCardSide } from "./TermLongCardSide.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { termUpdated, termDeleted } from "../../../store/terms.ts";
@@ -111,9 +110,5 @@ function TermLongCard({ termId }: Props) {
     </div>
   );
 }
-
-TermLongCard.propTypes = {
-  termId: PropTypes.string,
-};
 
 export default TermLongCard;

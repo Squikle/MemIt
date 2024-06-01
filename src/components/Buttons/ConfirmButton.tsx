@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { CheckMarkIcon } from "../Icons/CheckMarkIcon.tsx";
 import classNames from "classnames";
@@ -18,11 +17,5 @@ function ConfirmButton({ size, onClick, iconClassName } : ButtonProps) {
     ></BaseButton>
   );
 }
-
-ConfirmButton.propTypes = {
-  size: PropTypes.string,
-  onClick: PropTypes.func,
-  iconClassName: PropTypes.string,
-};
 
 export default ConfirmButton;

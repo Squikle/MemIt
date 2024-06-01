@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import styles from "./TermsSetCard.module.css";
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
@@ -79,7 +78,3 @@ export function TermsSetCard({ termsSetId }: Props) {
     </div>
   );
 }
-
-TermsSetCard.propTypes = {
-  termsSetId: PropTypes.string,
-};

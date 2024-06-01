@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import BaseButton from "./BaseButton.tsx";
 import { PlusIcon } from "../Icons/PlusIcon.tsx";
 import classNames from "classnames";
@@ -18,11 +17,5 @@ function AddButton({ size, onClick, iconClassName } : ButtonProps) {
     ></BaseButton>
   );
 }
-
-AddButton.propTypes = {
-  size: PropTypes.string,
-  onClick: PropTypes.func,
-  iconClassName: PropTypes.string,
-};
 
 export default AddButton;

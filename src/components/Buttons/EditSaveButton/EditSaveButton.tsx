@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import BaseButton from "../BaseButton.tsx";
 import { FloppyDiskIcon } from "../../Icons/FloppyDiskIcon.tsx";
 import { PencilIcon } from "../../Icons/PencilIcon.tsx";
@@ -24,12 +23,5 @@ function EditSaveButton({ size, onClick, iconClassName, isEditing } : EditSaveBu
 
   return <BaseButton size={size} onClick={onClick} icon={icon}></BaseButton>;
 }
-
-EditSaveButton.propTypes = {
-  size: PropTypes.string,
-  onClick: PropTypes.func,
-  isEditing: PropTypes.bool,
-  iconClassName: PropTypes.string,
-};
 
 export default EditSaveButton;

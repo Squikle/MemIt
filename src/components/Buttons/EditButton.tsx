@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { PencilIcon } from "../Icons/PencilIcon.tsx";
 import classNames from "classnames";
@@ -18,11 +17,5 @@ function EditButton({ size, onClick, iconClassName } : ButtonProps) {
     ></BaseButton>
   );
 }
-
-EditButton.propTypes = {
-  size: PropTypes.string,
-  onClick: PropTypes.func,
-  iconClassName: PropTypes.string,
-};
 
 export default EditButton;

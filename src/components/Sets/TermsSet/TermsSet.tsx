@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import styles from "./TermsSet.module.css";
 import TermLongCard from "../../Terms/TermLongCard/TermLongCard.tsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,7 +53,3 @@ export function TermsSet({ termsSetId }: Props) {
     </div>
   );
 }
-
-TermsSet.propTypes = {
-  termsSetId: PropTypes.string,
-};

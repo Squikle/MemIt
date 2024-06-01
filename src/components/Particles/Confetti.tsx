@@ -1,68 +1,37 @@
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadFull } from "tsparticles";
 import {
   useEffect,
-  forwardRef,
-  useImperativeHandle,
-  useRef,
   useCallback,
-  useMemo,
+  useState,
 } from "react";
 import particlesOptions from "./particles.json";
+import {useParticlesComponent, useParticlesEngine} from "@/components/Particles/useParticlesEngine.tsx";
+import {EmitterContainer} from "@tsparticles/plugin-emitters";
+import {Container} from "@tsparticles/engine";
+import type {EmitterInstance} from "@tsparticles/plugin-emitters/types/EmitterInstance";
 
-const Confetti = forwardRef(function Confetti(_, ref) {
-  const containerRef = useRef(null);
+type Props = {
+  isActive: boolean,
+  onLoaded?: () => void;
+}
+
+export default function Confetti({ isActive, onLoaded }: Props) {
+  const [container, setContainer] = useState<EmitterContainer | null>(null);
+  useParticlesEngine();
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadFull(engine);
-    });
-  }, []);
+    if (!container) return;
 
-  const loaded = useCallback((instanceContainer) => {
-    containerRef.current = instanceContainer;
-  }, []);
+    if (isActive) container?.play();
+    else (container?.plugins?.get("emitters") as any).array.forEach((x: EmitterInstance) => x.pause());
+  }, [isActive]);
 
-  const particles = useMemo(() => {
-    console.log("new memo");
-    return (
-      <Particles
-        id="tsparticles"
-        options={particlesOptions}
-        particlesLoaded={loaded}
-      />
-    );
-  }, [loaded]);
-
-  const pause = () => {
-    containerRef?.current?.plugins
-      .get("emitters")
-      .array.forEach((x) => x.pause());
-  };
-  const play = () => {
-    containerRef?.current?.plugins
-      .get("emitters")
-      .array.forEach((x) => x.play());
-  };
-  const start = () => {
-    containerRef?.current?.play(true);
-  };
-
-  useImperativeHandle(
-    ref,
-    () => {
-      return {
-        pause,
-        play,
-        start,
-      };
-    },
-    []
+  const handleParticlesLoaded = useCallback(
+      async (container?: Container) => {
+        setContainer(container as EmitterContainer);
+        if (onLoaded) onLoaded();
+      },
+      [onLoaded],
   );
 
-  return particles;
-});
-
-Confetti.propTypes = {};
-
-export default Confetti;
+  return useParticlesComponent("Confetti", particlesOptions as any, handleParticlesLoaded);
+}

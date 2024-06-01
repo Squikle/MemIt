@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import {IconProps} from "@/components/Icons/types.ts";
 
 export function TrashIcon({ className, style } : IconProps) {
@@ -13,8 +12,3 @@ export function TrashIcon({ className, style } : IconProps) {
     </svg>
   );
 }
-
-TrashIcon.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-};

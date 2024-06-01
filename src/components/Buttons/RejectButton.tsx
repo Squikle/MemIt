@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { CrossMarkIcon } from "../Icons/CrossMarkIcon.tsx";
 import classNames from "classnames";
@@ -18,11 +17,5 @@ function RejectButton({ size, onClick, iconClassName } : ButtonProps) {
     ></BaseButton>
   );
 }
-
-RejectButton.propTypes = {
-  size: PropTypes.string,
-  onClick: PropTypes.func,
-  iconClassName: PropTypes.string,
-};
 
 export default RejectButton;

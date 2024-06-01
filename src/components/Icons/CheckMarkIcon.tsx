@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import {IconProps} from "@/components/Icons/types.ts";
 
 export function CheckMarkIcon({ className, style } : IconProps) {
@@ -13,8 +12,3 @@ export function CheckMarkIcon({ className, style } : IconProps) {
     </svg>
   );
 }
-
-CheckMarkIcon.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-};

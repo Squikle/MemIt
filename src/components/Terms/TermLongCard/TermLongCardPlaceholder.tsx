@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import styles from "./TermLongCard.module.css";
-import PropTypes from "prop-types";
 import AddButton from "../../Buttons/AddButton.tsx";
 
 type Props = {
@@ -16,10 +15,4 @@ function TermLongCardPlaceholder({ onTermCreating }: Props) {
     </div>
   );
 }
-
-TermLongCardPlaceholder.propTypes = {
-  termId: PropTypes.string,
-  onTermCreating: PropTypes.func,
-};
-
 export default TermLongCardPlaceholder;

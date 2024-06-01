@@ -34,14 +34,16 @@ export function LoginForm() {
     const email = emailRef.current!.value;
     const password = passwordRef.current!.value;
 
+    let data;
     if (isLogin) {
-      const data = await login(email, password);
-      authContext.login(data.token);
-      navigate("/");
-      return;
+      data = await login(email, password);
+    } else {
+      data = await registration(email, password);
     }
 
-    const data = await registration(email, password);
+    if (!data.token)
+      throw new Error("token must be not empty!");
+
     authContext.login(data.token);
     navigate("/");
   };
@@ -64,5 +66,3 @@ export function LoginForm() {
     </div>
   );
 }
-
-LoginForm.propTypes = {};

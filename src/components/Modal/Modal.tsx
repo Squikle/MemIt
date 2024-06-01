@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import cssStyles from "./Modal.module.css";
-import PropTypes from "prop-types";
 import {CSSProperties, ReactNode} from "react";
 
 type ModalProps = {
@@ -42,11 +41,3 @@ export function Modal(props : ModalProps) {
     </div>
   );
 }
-
-Modal.propTypes = {
-  children: PropTypes.node,
-  onConfirm: PropTypes.func,
-  onCancel: PropTypes.func,
-  style: PropTypes.object,
-  isOpen: PropTypes.bool,
-};

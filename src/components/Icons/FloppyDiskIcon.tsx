@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import {IconProps} from "@/components/Icons/types.ts";
 
 export function FloppyDiskIcon({ className, style } : IconProps) {
@@ -13,8 +12,3 @@ export function FloppyDiskIcon({ className, style } : IconProps) {
     </svg>
   );
 }
-
-FloppyDiskIcon.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-};

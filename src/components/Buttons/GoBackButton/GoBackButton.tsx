@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import BaseButton from "../BaseButton.tsx";
 import { LeftArrowIcon } from "../../Icons/LeftArrowIcon.tsx";
 import classNames from "classnames";
@@ -36,13 +35,5 @@ function GoBackButton({ size, onClick, iconClassName, hideOnNarrow = true } : Ba
     </div>
   );
 }
-
-GoBackButton.propTypes = {
-  size: PropTypes.string,
-  onClick: PropTypes.func,
-  style: PropTypes.object,
-  hideOnNarrow: PropTypes.bool,
-  iconClassName: PropTypes.string,
-};
 
 export default GoBackButton;

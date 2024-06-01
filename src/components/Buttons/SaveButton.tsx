@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { FloppyDiskIcon } from "../Icons/FloppyDiskIcon.tsx";
 import classNames from "classnames";
@@ -18,11 +17,5 @@ function SaveButton({ size, onClick, iconClassName } : ButtonProps) {
     ></BaseButton>
   );
 }
-
-SaveButton.propTypes = {
-  size: PropTypes.string,
-  onClick: PropTypes.func,
-  iconClassName: PropTypes.string,
-};
 
 export default SaveButton;

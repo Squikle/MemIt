@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import {IconProps} from "@/components/Icons/types.ts";
 
 export function PencilIcon({ className, style } : IconProps) {
@@ -13,8 +12,3 @@ export function PencilIcon({ className, style } : IconProps) {
     </svg>
   );
 }
-
-PencilIcon.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-};

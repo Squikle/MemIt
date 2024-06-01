@@ -5,28 +5,28 @@ import TermsStack from "../components/Terms/TermsStack/TermsStack.tsx";
 import classNames from "classnames";
 import style from "./Pages.module.css";
 import Confetti from "../components/Particles/Confetti.tsx";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import RestartButton from "../components/Buttons/RestartButton.tsx";
 import termsPageStyle from "./TermsPage.module.css";
+
+const CONFETTI_DURATION_SEC = 2;
 
 export function TermsPage() {
   const { termsSetId } = useParams();
   const [stackFinished, setStackFinished] = useState(false);
-  const confettiControl = useRef(null);
-
-  const pauseConfetti = () => {
-    confettiControl.current?.pause();
-  };
-  const startConfetti = () => {
-    confettiControl.current?.start();
-  };
+  const [isConfettiPlaying, setIsConfettiPlaying] = useState(false);
 
   const handleStackFinished = () => {
     setStackFinished(true);
-
-    startConfetti();
-    setTimeout(() => pauseConfetti(), 2000);
+    playConfetti();
   };
+
+  const playConfetti = () => {
+    setIsConfettiPlaying(true);
+    setTimeout(() => {
+      setIsConfettiPlaying(false);
+    }, CONFETTI_DURATION_SEC * 1000);
+  }
 
   return (
     <>
@@ -47,7 +47,7 @@ export function TermsPage() {
           )}
         </div>
       </main>
-      <Confetti ref={confettiControl}></Confetti>
+      <Confetti isActive={isConfettiPlaying}></Confetti>
     </>
   );
 }

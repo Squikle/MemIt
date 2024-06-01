@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import BaseButton from "./BaseButton";
 import { TrashIcon } from "../Icons/TrashIcon.tsx";
 import classNames from "classnames";
@@ -18,11 +17,5 @@ function DeleteButton({ size, onClick, iconClassName } : ButtonProps) {
     ></BaseButton>
   );
 }
-
-DeleteButton.propTypes = {
-  size: PropTypes.string,
-  onClick: PropTypes.func,
-  iconClassName: PropTypes.string,
-};
 
 export default DeleteButton;
