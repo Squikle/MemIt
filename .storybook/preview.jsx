@@ -122,17 +122,17 @@ const rootReducer = combineReducers({ entities: entitiesReducer });
 const store = configureStore({ reducer: rootReducer });
 
 const decorators = [
-  (Story: React.FC) => {
+  (Story) => {
     return <MemoryRouter initialEntries={["/"]}><Story/></MemoryRouter>;
   },
 
-  (Story: React.FC) => {
+  (Story) => {
     const authContext = useAuthContext();
     authContext.login("123");
     return <Story />;
   },
 
-  (Story: React.FC) => {
+  (Story) => {
     return (
       <AuthContextProvider>
         <Story />
@@ -140,7 +140,7 @@ const decorators = [
     );
   },
 
-  (Story: React.FC) => {
+  (Story) => {
     return <Provider store={store}><Story/></Provider>;
   },
 ];
