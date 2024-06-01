@@ -4,8 +4,8 @@ import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import "../index.css";
 import { MemoryRouter } from "react-router-dom";
-import { AuthContextProvider } from "../src/contexts/AuthContext/AuthContext";
-import { useAuthContext } from "../src/contexts/AuthContext/useAuthContext";
+import { AuthContextProvider } from "../src/contexts/AuthContext/AuthContext.ts";
+import { useAuthContext } from "../src/contexts/AuthContext/useAuthContext.ts";
 
 const termsState = [
   {

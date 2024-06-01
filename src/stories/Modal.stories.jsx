@@ -1,4 +1,4 @@
-import { Modal } from "../components/Modal/Modal";
+import { Modal } from "../components/Modal/Modal.tsx";
 import { useArgs } from "@storybook/store";
 
 export default {
