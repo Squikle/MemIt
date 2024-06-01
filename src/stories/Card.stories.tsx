@@ -1,8 +1,8 @@
-import Card from "../components/Card/Card";
+import TermCard from "../components/Terms/TermCard/TermCard.tsx";
 
 export default {
   title: "Components/Card",
-  component: Card,
+  component: TermCard,
   parameters: {
     layout: "centered",
   },

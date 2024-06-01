@@ -1,11 +1,11 @@
-import React from "react";
 import trainImage from "../src/stories/assets/train.jpg";
 import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import "../index.css";
 import { MemoryRouter } from "react-router-dom";
-import { AuthContextProvider } from "../src/contexts/AuthContext/AuthContext.ts";
+import { AuthContextProvider} from "../src/contexts/AuthContext/AuthContext";
 import { useAuthContext } from "../src/contexts/AuthContext/useAuthContext.ts";
+import React from "react";
 
 const termsState = [
   {
@@ -122,17 +122,17 @@ const rootReducer = combineReducers({ entities: entitiesReducer });
 const store = configureStore({ reducer: rootReducer });
 
 const decorators = [
-  (story) => {
-    return <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>;
+  (Story: React.FC) => {
+    return <MemoryRouter initialEntries={["/"]}><Story/></MemoryRouter>;
   },
 
-  (story) => {
+  (Story: React.FC) => {
     const authContext = useAuthContext();
     authContext.login("123");
-    return story();
+    return <Story />;
   },
 
-  (Story) => {
+  (Story: React.FC) => {
     return (
       <AuthContextProvider>
         <Story />
@@ -140,8 +140,8 @@ const decorators = [
     );
   },
 
-  (story) => {
-    return <Provider store={store}>{story()}</Provider>;
+  (Story: React.FC) => {
+    return <Provider store={store}><Story/></Provider>;
   },
 ];
 

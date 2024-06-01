@@ -1,5 +1,5 @@
-import { Navbar } from "../components/Navbar/Navbar.ts";
-import { HomePage } from "../pages/HomePage.ts";
+import { Navbar} from "../components/Navbar/Navbar.tsx";
+import { HomePage} from "../pages/HomePage.tsx";
 
 export default {
   title: "Components/Pages/Homepage",

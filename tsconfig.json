@@ -12,8 +12,9 @@
     "allowJs": true,
     "declaration": true,
     "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types"
+      "node_modules/@types",
+      "node_modules",
+      "./src/@types",
     ],
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -36,7 +37,9 @@
   },
   "include": [
     "src",
-    "vite.config.ts"
+    "vite.config.ts",
+    "src/vite-env.d.ts",
+    ".storybook"
   ],
   "references": [
     {

@@ -1,15 +1,16 @@
-import LongCard from "../components/LongCard/LongCard";
+import TermLongCard from "../components/Terms/TermLongCard/TermLongCard.tsx";
+import {StoryFn} from "@storybook/react";
 
 export default {
   title: "Components/LongCard",
-  component: LongCard,
+  component: TermLongCard,
   parameters: {
     layout: "centered",
   },
 };
 
-const Template = ({ termId }) => {
-  return <LongCard termId={termId}></LongCard>;
+const Template: StoryFn<{termId: string}> = (args) => {
+  return <TermLongCard {...args}></TermLongCard>;
 };
 
 export const Text = Template.bind({});

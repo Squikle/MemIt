@@ -2,8 +2,8 @@ import classNames from "classnames";
 import cssStyles from "./Modal.module.css";
 import {CSSProperties, ReactNode} from "react";
 
-type ModalProps = {
-  children: ReactNode,
+export type ModalProps = {
+  children?: ReactNode,
   onConfirm: () => void,
   onCancel: () => void,
   style: CSSProperties, 

@@ -17,7 +17,7 @@ const imageOptimizer = ViteImageOptimizer({
                                                   effort: 6,
                                               },
                                           });
-console.log(path.resolve(__dirname, "src"));
+
 // https://vitejs.dev/config/
 export default defineConfig({
                                 base: "",

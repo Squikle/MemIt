@@ -1,4 +1,4 @@
-import { TermsSetCard } from "../components/TermsSetCard/TermsSetCard";
+import { TermsSetCard} from "../components/Sets/TermsSetCard/TermsSetCard.tsx";
 
 export default {
   title: "Components/TermsSetCard",

@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import trainImage from "../stories/assets/train.jpg";
+import trainImage from "@/stories/assets/train.jpg";
 import * as termsSetsActions from "./termsSets.ts";
 import {Term} from "@/store/types.ts";
 import { v4 as uuidv4 } from "uuid";

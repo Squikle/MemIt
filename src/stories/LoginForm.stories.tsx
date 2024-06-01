@@ -1,4 +1,4 @@
-import { LoginForm } from "../components/LoginForm/LoginForm.ts";
+import { LoginForm} from "../components/LoginForm/LoginForm.tsx";
 
 export default {
   title: "Components/LoginForm",

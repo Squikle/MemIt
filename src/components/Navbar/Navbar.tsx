@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { useAuthContext } from "../../contexts/AuthContext/useAuthContext.ts";
 
 export function Navbar() {
-  const setActiveClass = ({ isActive }) =>
+  const setActiveClass = ({ isActive }: { isActive: boolean }) =>
     classNames(styles.link, { [styles.active]: isActive });
   const authContext = useAuthContext();
   const navigate = useNavigate();

@@ -1,5 +1,6 @@
-import { Modal } from "../components/Modal/Modal.tsx";
+import {Modal, ModalProps} from "../components/Modal/Modal.tsx";
 import { useArgs } from "@storybook/store";
+import {StoryFn} from "@storybook/react";
 
 export default {
   title: "Components/Modal",
@@ -9,7 +10,8 @@ export default {
   },
 };
 
-const Template = (args) => {
+
+const Template: StoryFn<ModalProps> = (args: ModalProps) => {
   const [, setArgs] = useArgs();
 
   const openModal = () => {
@@ -21,19 +23,19 @@ const Template = (args) => {
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: "white",
-        width: "500px",
-        height: "500px",
-        position: "relative",
-      }}
-    >
-      <button onClick={openModal} style={{ padding: "25px" }}>
-        Open modal
-      </button>
-      <Modal {...args} onCancel={closeModal} onConfirm={closeModal}></Modal>
-    </div>
+      <div
+          style={{
+            backgroundColor: "white",
+            width: "500px",
+            height: "500px",
+            position: "relative",
+          }}
+      >
+        <button onClick={openModal} style={{ padding: "25px" }}>
+          Open modal
+        </button>
+        <Modal {...args} onCancel={closeModal} onConfirm={closeModal}></Modal>
+      </div>
   );
 };
 

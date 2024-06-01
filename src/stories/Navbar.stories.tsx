@@ -1,4 +1,4 @@
-import { Navbar } from "../components/Navbar/Navbar.ts";
+import { Navbar} from "../components/Navbar/Navbar.tsx";
 
 export default {
   title: "Components/Navbar",
