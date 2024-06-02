@@ -32,9 +32,13 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@shared/*": ["../shared/dist/*"]
     }
   },
+  "references": [{
+    "path": "../shared"
+  }],
   "include": [
     "src",
     "vite.config.ts",

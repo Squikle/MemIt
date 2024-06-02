@@ -26,8 +26,6 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-export const check = async () => {
-  return {};
-  //const response = await host.post("api/auth");
-  //return response;
+export const verify = async () => {
+  await host.post("/auth/verify");
 };

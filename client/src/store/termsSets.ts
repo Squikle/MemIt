@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {TermSet} from "@/store/types.ts";
+import TermSet from "@shared/@types/TermSet.ts";
 
 const termsSetsState: TermSet[] = [
   {

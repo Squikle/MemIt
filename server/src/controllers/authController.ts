@@ -1,6 +1,8 @@
-import User from "../@types/user";
+import User from "../@types/User";
 import jwt from "jsonwebtoken";
 import { createHash } from "node:crypto";
+import {UserError} from "../models/UserError";
+import {err, ok, Result} from "neverthrow";
 
 const users: User[] = [
     {
@@ -9,34 +11,50 @@ const users: User[] = [
     },
 ];
 
-export function authUser(user: User) {
+export async function authUser(user: User) {
     let authUser = users.find(x => x.email === user.email);
+    const errorMessage = `User doesn't exist or the password is incorrect`;
+
     if (!authUser) {
-        return null;
+        return err(new UserError(errorMessage, 400));
     }
 
     const hashedPassword = hashPassword(user.password);
-    if (hashedPassword === authUser.password) {
-        return getToken(user.email);
+    if (hashedPassword !== authUser.password) {
+        return err(new UserError(errorMessage, 400));
     }
 
-    return null;
+    let token = await getToken(user.email);
+    return ok(token);
 }
 
-export function registerUser(user: User) {
+export async function registerUser(user: User): Promise<Result<string, UserError>> {
     let authUser = users.find(x => x.email === user.email);
     if (authUser)
-        throw new Error(`Email ${user.email} is already taken!`)
+        return err( new UserError(`Email ${user.email} is already taken!`, 400));
 
     users.push({
         email: user.email,
         password: hashPassword(user.password)
     });
-    return getToken(user.email);
+
+    try {
+        let token = await getToken(user.email);
+        return ok(token);
+    } catch (e) {
+        return err( new UserError(`Couldn't generate a token`, 500));
+    }
 }
 
 export async function verifyToken(token: string) {
-    return jwt.verify(token, process.env.JWT_SECRET_KEY!);
+    return new Promise((res, rej) => {
+        jwt.verify(token, process.env.JWT_SECRET_KEY!, (err, decoded) => {
+            if (err)
+                return rej(err);
+
+            return res(decoded);
+        });
+    });
 }
 
 function hashPassword(password: string) {
@@ -44,5 +62,12 @@ function hashPassword(password: string) {
 }
 
 function getToken(email: string) {
-    return jwt.sign({ email: email }, process.env.JWT_SECRET_KEY!);
+    return new Promise<string>((res, rej) => {
+        jwt.sign({ email: email }, process.env.JWT_SECRET_KEY!, (err: any, encoded: any) => {
+            if (err)
+                return rej(err);
+
+            return res(encoded);
+        });
+    });
 }

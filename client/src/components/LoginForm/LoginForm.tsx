@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import styles from "./LoginForm.module.css";
 import {FormEvent, useRef, useState} from "react";
-import { login, registration } from "../../http/userAPI.ts";
+import { login, registration } from "@/api/authApi.ts";
 import { useAuthContext } from "../../contexts/AuthContext/useAuthContext.ts";
 import { useNavigate } from "react-router-dom";
 

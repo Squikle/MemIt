@@ -6,7 +6,7 @@ import { TermsSetPage } from "./pages/TermsSetPage.tsx";
 import { TermsSetsListPage } from "./pages/TermsSetsListPage.tsx";
 import { LoginPage } from "./pages/LoginPage.tsx";
 import { useEffect } from "react";
-import { check } from "./http/userAPI.ts";
+import { verify } from "@/api/authApi.ts";
 import { useAuthContext } from "./contexts/AuthContext/useAuthContext.ts";
 import { TermsPage } from "./pages/TermsPage.tsx";
 
@@ -19,7 +19,7 @@ function App() {
 
     if (!authContext.authorized) navigateToLogin();
 
-    check().catch(() => {
+    verify().catch(() => {
       navigateToLogin();
     });
   }, [navigate, authContext]);
