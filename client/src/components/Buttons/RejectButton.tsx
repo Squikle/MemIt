@@ -2,7 +2,7 @@ import BaseButton from "./BaseButton";
 import { CrossMarkIcon } from "../Icons/CrossMarkIcon.tsx";
 import classNames from "classnames";
 import styles from "./Buttons.module.css";
-import {ButtonProps} from "@/components/Buttons/types.tsx";
+import {ButtonProps} from "@/components/Buttons/@types.tsx";
 
 function RejectButton({ size, onClick, iconClassName } : ButtonProps) {
   return (

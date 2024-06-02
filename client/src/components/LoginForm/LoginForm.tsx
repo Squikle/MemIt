@@ -34,17 +34,17 @@ export function LoginForm() {
     const email = emailRef.current!.value;
     const password = passwordRef.current!.value;
 
-    let data;
+    let token;
     if (isLogin) {
-      data = await login(email, password);
+      token = await login(email, password);
     } else {
-      data = await registration(email, password);
+      token = await registration(email, password);
     }
 
-    if (!data.token)
+    if (!token)
       throw new Error("token must be not empty!");
 
-    authContext.login(data.token);
+    authContext.login(token);
     navigate("/");
   };
 

@@ -1,5 +1,5 @@
 import "./pageStyles.css";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import GoBackButton from "../components/Buttons/GoBackButton/GoBackButton.tsx";
 import TermsStack from "../components/Terms/TermsStack/TermsStack.tsx";
 import classNames from "classnames";

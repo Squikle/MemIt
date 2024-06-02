@@ -2,29 +2,27 @@ import { host } from ".";
 
 export const registration = async (email: string, password: string) => {
   try {
-    await host.post("uri/auth/registration", {
+    const response = await host.post("/auth/registration", {
       email,
       password,
     });
-    return { login: "test" };
-    //return response.data;
+    return response.data.token;
   } catch (error) {
     console.log(error);
-    return { token: "test" };
+    throw error;
   }
 };
 
 export const login = async (email: string, password: string) => {
   try {
-    await host.post("uri/auth/login", {
+    const response = await host.post("/auth/login", {
       email,
       password,
     });
-    return { login: "test" };
-    //return response.data;
+    return response.data.token;
   } catch (error) {
     console.log(error);
-    return { token: "test" };
+    throw error;
   }
 };
 
