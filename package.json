@@ -1,0 +1,16 @@
+{
+  "name": "memit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "npm --prefix server start",
+    "build-frontend": "npm run build --prefix client",
+    "build-backend": "npm run build --prefix server",
+    "build-shared": "npm run build --prefix shared",
+    "build": "npm run build-shared && npm run build-backend && npm run build-frontend"
+  },
+  "author": "",
+  "license": "MIT"
+}

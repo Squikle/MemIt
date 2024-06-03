@@ -7,7 +7,6 @@ import termsRouter from "./routes/terms/terms";
 import {errorHandler} from "./middlewares/errorHandler";
 import cors from "cors";
 
-const port = 80;
 const app = express();
 const distPath = path.resolve(__dirname, "..", "..", "client", "dist");
 
@@ -24,6 +23,6 @@ app.get("*", (req, res) => {
 });
 
 app.use(errorHandler);
-app.listen(port, () => {
-    console.log(`Server listening on the port ${port}`);
+app.listen(process.env.PORT || 3213, () => {
+    console.log(`Server listening on the port ${process.env.PORT || 3213}`);
 });

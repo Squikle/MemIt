@@ -1,8 +1,8 @@
 import User from "../@types/User";
 import jwt from "jsonwebtoken";
 import { createHash } from "node:crypto";
-import {UserError} from "../models/UserError";
 import {err, ok, Result} from "neverthrow";
+import {UserError} from "../@types/UserError";
 
 const users: User[] = [
     {
