@@ -1,11 +1,12 @@
 import express from "express";
-import {authUser, registerUser, verifyToken} from "../controllers/authController";
-import Token from "../@types/Token";
+import {toDomain} from "./convertor";
+import {authUser, registerUser, verifyToken} from "../../controllers/authController";
+import Token from "../../@types/domain/Token";
 
 const router = express.Router();
 
 router.post("/login", async (req, res, next) => {
-    let loginResult = await authUser({...req.body});
+    let loginResult = await authUser(toDomain(req.body));
     if (loginResult.isErr()) {
         return next(loginResult.error);
     }
@@ -17,7 +18,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/registration", async (req, res, next) => {
-    let registerResult = await registerUser({...req.body});
+    let registerResult = await registerUser(toDomain(req.body));
     if (registerResult.isErr()) {
         return next(registerResult.error);
     }

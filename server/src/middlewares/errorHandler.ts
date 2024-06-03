@@ -1,6 +1,6 @@
 import e, {ErrorRequestHandler} from "express";
-import Error from "../@types/Error";
-import {UserError} from "../@types/UserError";
+import Error from "../@types/domain/Error";
+import {UserError} from "../@types/domain/UserError";
 
 export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     if (res.headersSent) {

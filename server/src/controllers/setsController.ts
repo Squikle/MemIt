@@ -1,9 +1,9 @@
 import {v4 as uuidv4} from "uuid";
 import TermSetDto from "../../../shared/src/@types/api/TermSetDto";
-import TermSet from "../@types/TermSet";
 import {getCountBySetId} from "./termsController";
+import TermsSet from "../@types/domain/TermsSet";
 
-let termsSets: TermSet[] = [
+let termsSets: TermsSet[] = [
     {
         id: "0",
         name: "first",

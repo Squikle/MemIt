@@ -1,26 +1,18 @@
-import User from "../@types/User";
 import jwt from "jsonwebtoken";
-import { createHash } from "node:crypto";
 import {err, ok, Result} from "neverthrow";
-import {UserError} from "../@types/UserError";
-
-const users: User[] = [
-    {
-        email: "test@test.com",
-        password: "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-    },
-];
+import UserModel, { toDal } from "../models/user"
+import User from "../@types/domain/User";
+import {UserError} from "../@types/domain/UserError";
 
 export async function authUser(user: User) {
-    let authUser = users.find(x => x.email === user.email);
+    const userModel = await UserModel.findOne({email: user.email});
     const errorMessage = `User doesn't exist or the password is incorrect`;
 
-    if (!authUser) {
+    if (!userModel) {
         return err(new UserError(errorMessage, 400));
     }
 
-    const hashedPassword = hashPassword(user.password);
-    if (hashedPassword !== authUser.password) {
+    if (user.password !== userModel.password) {
         return err(new UserError(errorMessage, 400));
     }
 
@@ -29,20 +21,18 @@ export async function authUser(user: User) {
 }
 
 export async function registerUser(user: User): Promise<Result<string, UserError>> {
-    let authUser = users.find(x => x.email === user.email);
+    let authUser = await UserModel.findOne({email: user.email});
     if (authUser)
         return err( new UserError(`Email ${user.email} is already taken!`, 400));
 
-    users.push({
-        email: user.email,
-        password: hashPassword(user.password)
-    });
+    const userModel = toDal(user);
+    await userModel.save()
 
     try {
-        let token = await getToken(user.email);
+        let token = await getToken(userModel.email);
         return ok(token);
     } catch (e) {
-        return err( new UserError(`Couldn't generate a token`, 500));
+        return err(new UserError(`Couldn't generate a token`, 500));
     }
 }
 
@@ -55,10 +45,6 @@ export async function verifyToken(token: string) {
             return res(decoded);
         });
     });
-}
-
-function hashPassword(password: string) {
-    return createHash("sha256").update(password).digest("hex");
 }
 
 function getToken(email: string) {

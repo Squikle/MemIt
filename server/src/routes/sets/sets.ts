@@ -1,12 +1,12 @@
 import express from "express";
 import {addSet, editSet, getAll, removeSet} from "../../controllers/setsController";
 import toDto from "./convertor";
-import TermSet from "../../@types/TermSet";
+import TermsSet from "../../@types/domain/TermsSet";
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    let sets: TermSet[] = getAll();
+    let sets: TermsSet[] = getAll();
     if (!sets || sets.length <= 0) {
         res.sendStatus(404);
         return;

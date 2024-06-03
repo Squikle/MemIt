@@ -1,6 +1,5 @@
 import TermDto from "../../../../shared/src/@types/api/TermDto";
-import Term from "../../@types/Term";
-
+import Term from "../../@types/domain/Term";
 export default function toDto(term: Term): TermDto {
     return {
         setId: term.setId,

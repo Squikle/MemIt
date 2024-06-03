@@ -1,5 +1,4 @@
-type User = {
+export type UserDto = {
     email: string,
     password: string
 }
-export default User;

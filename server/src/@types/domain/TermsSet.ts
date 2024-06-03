@@ -1,6 +1,6 @@
-type TermSet = {
+type TermsSet = {
     id: string,
     name: string,
     termsCount?: number
 }
-export default TermSet;
+export default TermsSet;

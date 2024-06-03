@@ -1,7 +1,7 @@
 import TermSetDto from "../../../../shared/src/@types/api/TermSetDto";
-import TermSet from "../../@types/TermSet";
+import TermsSet from "../../@types/domain/TermsSet";
 
-export default function toDto(termSet: TermSet): TermSetDto {
+export default function toDto(termSet: TermsSet): TermSetDto {
     return {
         id: termSet.id,
         name: termSet.name,

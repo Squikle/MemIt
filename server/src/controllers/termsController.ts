@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import TermDto from "../../../shared/src/@types/api/TermDto";
-import Term from "../@types/Term";
+import Term from "../@types/domain/Term";
 
 let terms: Term[] = [
     {
