@@ -1,5 +1,7 @@
-import TermSet from "@shared/@types/TermSet";
 import {v4 as uuidv4} from "uuid";
+import TermSetDto from "../../../shared/src/@types/api/TermSetDto";
+import TermSet from "../@types/TermSet";
+import {getCountBySetId} from "./termsController";
 
 let termsSets: TermSet[] = [
     {
@@ -17,17 +19,20 @@ let termsSets: TermSet[] = [
 ];
 
 export function getAll() {
-    return termsSets;
+    return termsSets.map(x => {
+        x.termsCount = getCountBySetId(x.id)
+        return x;
+    });
 }
 
-export function addSet(termSet: TermSet) {
+export function addSet(termSet: TermSetDto) {
     if (!termSet.id)
         termSet.id = uuidv4()
     termsSets.push(termSet);
     return termSet.id;
 }
 
-export function editSet(termSet: TermSet) {
+export function editSet(termSet: TermSetDto) {
     termsSets = termsSets.map(x => {
         if (x.id === termSet.id)
             x = termSet;

@@ -2,8 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import path from "node:path";
 import authRouter from "./routes/auth";
-import setsRouter from "./routes/sets";
-import termsRouter from "./routes/terms";
+import setsRouter from "./routes/sets/sets";
+import termsRouter from "./routes/terms/terms";
 import {errorHandler} from "./middlewares/errorHandler";
 import cors from "cors";
 

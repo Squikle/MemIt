@@ -1,2 +1,2 @@
-export * from "./@types/TermSet";
-export * from "./@types/Term";
+export * from "./@types/api/TermSetDto";
+export * from "./@types/api/TermDto";

@@ -8,8 +8,8 @@ import Confetti from "../components/Particles/Confetti.tsx";
 import {useEffect, useState} from "react";
 import RestartButton from "../components/Buttons/RestartButton.tsx";
 import termsPageStyle from "./TermsPage.module.css";
-import {useDispatch} from "react-redux";
-import {fetchTermsBySet} from "@/store/terms.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchTermsBySet, selectTermsBySetId} from "@/store/terms.ts";
 import {AppDispatch} from "@/main.tsx";
 
 const CONFETTI_DURATION_SEC = 2;
@@ -19,6 +19,7 @@ export function TermsPage() {
   const [stackFinished, setStackFinished] = useState(false);
   const [isConfettiPlaying, setIsConfettiPlaying] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
+  const terms = useSelector((state) => selectTermsBySetId(state, termsSetId!)).filter(x => !x.isNew);
 
   useEffect(() => {
     dispatch(fetchTermsBySet(termsSetId!))
@@ -41,10 +42,7 @@ export function TermsPage() {
       <main className={classNames("container", "noScroll", style.centered)}>
         <GoBackButton hideOnNarrow={false} />
         <div className="rolloutReversed">
-          <TermsStack
-            termsSetId={termsSetId!}
-            onStackFinished={handleStackFinished}
-          ></TermsStack>
+          {terms.length > 0 && <TermsStack terms={terms} onStackFinished={handleStackFinished}></TermsStack>}
           {stackFinished && (
             <div className={classNames(termsPageStyle.restart)}>
               <RestartButton

@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
-import {getSets} from "@/api/termSetsApi.ts";
-import TermSet from "@shared/@types/TermSet";
+import {getSets, removeSet as removeSetApi} from "@/api/termSetsApi.ts";
 import {RootState} from "@/store/types.ts";
+import TermSet from "@/@types/TermSet.ts";
 
 export type TermsSetsState = {
   sets: TermSet[],
@@ -19,6 +19,10 @@ export const fetchSets = createAsyncThunk('sets/fetchAll', () => {
   return getSets();
 })
 
+export const removeSet = createAsyncThunk('sets/remove', async (setId: string) => {
+  return { setId: await removeSetApi(setId) };
+})
+
 const slice = createSlice({
   name: "termsSets",
   initialState: initialState,
@@ -33,11 +37,14 @@ const slice = createSlice({
     })
     .addCase(fetchSets.fulfilled, (state, action) => {
       state.status = 'succeeded';
-      state.sets = state.sets.concat(action.payload);
+      state.sets = action.payload;
     })
     .addCase(fetchSets.rejected, (state, action) => {
       state.status = 'failed'
       state.error = action.error.message || null
+    })
+    .addCase(removeSet.fulfilled, (state, action) => {
+      state.sets = state.sets.filter((x) => x.id !== action.payload.setId);
     })
   }
 });

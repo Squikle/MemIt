@@ -1,19 +1,17 @@
 import {authHost} from ".";
-import TermSet from "@shared/@types/TermSet.ts";
+import TermSet from "@shared/@types/TermSetDto.ts";
 
 export const getSets = async () => {
     const response = await authHost.get(`/sets`);
     return response.data as TermSet[];
 };
 
-export const addSet = async (set: TermSet) => {
-    await authHost.post(`/sets/`, set);
+export const addOrUpdateSet = async (set: TermSet) => {
+    const response = await authHost.put(`/sets`, set);
+    return response.data.id;
 };
 
-export const editTerm = async (set: TermSet) => {
-    await authHost.put(`/sets/${set.id}`, set);
-};
-
-export const removeTerm = async (setId: string) => {
-    await authHost.delete(`/sets/${setId}`);
+export const removeSet = async (setId: string) => {
+    const response = await authHost.delete(`/sets/${setId}`);
+    return response.data.id;
 };

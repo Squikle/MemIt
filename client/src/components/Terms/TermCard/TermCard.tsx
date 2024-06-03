@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { TermCardSide } from "./TermCardSide.tsx";
 import classNames from "classnames";
 import {RootState} from "@/store/types.ts";
-import Term from "@shared/@types/Term";
+import Term from "@/@types/Term.ts";
 
 type CardProps = {
   termId: string,

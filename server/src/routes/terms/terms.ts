@@ -1,5 +1,5 @@
 import express from "express";
-import {addOrUpdateTerm, editTerm, getById, getBySetId, removeTerm} from "../controllers/termsController";
+import {addOrUpdateTerm, getById, getBySetId, removeTerm} from "../../controllers/termsController";
 
 const router = express.Router();
 

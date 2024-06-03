@@ -1,5 +1,6 @@
-import Term from "@shared/@types/Term";
 import { v4 as uuidv4 } from "uuid";
+import TermDto from "../../../shared/src/@types/api/TermDto";
+import Term from "../@types/Term";
 
 let terms: Term[] = [
     {
@@ -62,7 +63,7 @@ let terms: Term[] = [
         id: "9",
         expression: "3",
         translation: "three",
-        setId: "1",
+        setId: "1"
     },
 ];
 
@@ -74,7 +75,11 @@ export function getById(termId: string) {
     return terms.find(x => x.id === termId);
 }
 
-export function addOrUpdateTerm(term: Term) {
+export function getCountBySetId(setId: string) {
+    return terms.filter(x => x.setId === setId).length;
+}
+
+export function addOrUpdateTerm(term: TermDto) {
     if (!term.id) {
         term.id = uuidv4()
     }

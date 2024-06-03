@@ -22,5 +22,6 @@ export const addOrUpdateTerm = async (term: Term) => {
 };
 
 export const removeTerm = async (termId: string) => {
-    await authHost.delete(`/terms/${termId}`);
+    const response = await authHost.delete(`/terms/${termId}`);
+    return response.data.id;
 };

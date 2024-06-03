@@ -39,7 +39,7 @@ router.post("/verify", async (req, res, next) => {
         return next(e);
     }
 
-    res.status(200);
+    res.sendStatus(200);
 });
 
 export default router;

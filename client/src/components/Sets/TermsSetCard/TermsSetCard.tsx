@@ -1,14 +1,14 @@
 import styles from "./TermsSetCard.module.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import {selectTermsSet, termsSetDeleted} from "../../../store/termsSets.ts";
+import {removeSet, selectTermsSet} from "../../../store/termsSets.ts";
 import ConfirmButton from "../../Buttons/ConfirmButton.tsx";
 import RejectButton from "../../Buttons/RejectButton.tsx";
 import DeleteButton from "../../Buttons/DeleteButton.tsx";
 import React, { useState } from "react";
 import EditButton from "../../Buttons/EditButton.tsx";
 import { useNavigate } from "react-router-dom";
-import {selectTermsBySetId} from "@/store/terms.ts";
+import {AppDispatch} from "@/main.tsx";
 
 type Props = {
   termsSetId: string
@@ -17,10 +17,7 @@ type Props = {
 export function TermsSetCard({ termsSetId }: Props) {
   const [isDeleting, setIsDeleting] = useState(false);
   const termsSet = useSelector((state) => selectTermsSet(state, termsSetId));
-  const termsCount = useSelector((state) =>
-    selectTermsBySetId(state, termsSetId)
-  ).length;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,7 +31,7 @@ export function TermsSetCard({ termsSetId }: Props) {
   };
 
   const confirmRemoving = (event: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(termsSetDeleted(termsSetId));
+    dispatch(removeSet(termsSetId));
     event.preventDefault();
   };
 
@@ -48,7 +45,7 @@ export function TermsSetCard({ termsSetId }: Props) {
       <div className={styles.content}>
         <p>{termsSet?.name}</p>
         <p className={styles.wordsCount}>
-          ({termsCount ? `${termsCount} words` : "empty"})
+          ({termsSet.termsCount ? `${termsSet.termsCount} words` : "empty"})
         </p>
       </div>
       <div className={styles.buttons}>

@@ -1,9 +1,9 @@
 import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
 import * as termsSetsActions from "./termsSets.ts";
 import { v4 as uuidv4 } from "uuid";
-import Term from "@shared/@types/Term.ts";
-import {addOrUpdateTerm, getTerm, getTermsBySet} from "@/api/termsApi.ts";
+import {addOrUpdateTerm, getTerm, getTermsBySet, removeTerm as removeTermApi} from "@/api/termsApi.ts";
 import {RootState} from "@/store/types.ts";
+import Term from "@/@types/Term.ts";
 
 export type TermsState = {
   terms: Term[],
@@ -32,13 +32,17 @@ export const addNewTerm = createAsyncThunk(
     }
 )
 
+export const removeTerm = createAsyncThunk(
+    'terms/remove',
+    async (termId: string) => {
+      return { termId: await removeTermApi(termId) };
+    }
+)
+
 const slice = createSlice({
   name: "terms",
   initialState: initialState,
   reducers: {
-    termDeleted: (state, action) => {
-      state.terms = state.terms.filter((x) => x.id != action.payload);
-    },
     emptyTermAdded: (state, action) => {
       state.terms.push({
         id: uuidv4(),
@@ -66,6 +70,9 @@ const slice = createSlice({
       state.status = 'failed'
       state.error = action.error.message || null
     })
+    .addCase(removeTerm.fulfilled, (state, action) => {
+      state.terms = state.terms.filter((x) => x.id !== action.payload.termId);
+    })
     .addCase(addNewTerm.fulfilled, (state, action) => {
       const index = state.terms.findIndex((term) => term.id === action.payload.termId);
       if (index === -1) {
@@ -83,7 +90,7 @@ const slice = createSlice({
   },
 });
 
-export const { termDeleted, emptyTermAdded } = slice.actions;
+export const { emptyTermAdded } = slice.actions;
 
 export default slice.reducer;
 

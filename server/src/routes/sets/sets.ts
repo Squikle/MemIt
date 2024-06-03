@@ -1,16 +1,18 @@
 import express from "express";
-import {addSet, editSet, getAll, removeSet} from "../controllers/setsController";
+import {addSet, editSet, getAll, removeSet} from "../../controllers/setsController";
+import toDto from "./convertor";
+import TermSet from "../../@types/TermSet";
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    let terms = getAll();
-    if (!terms || terms.length <= 0) {
+    let sets: TermSet[] = getAll();
+    if (!sets || sets.length <= 0) {
         res.sendStatus(404);
         return;
     }
 
-    res.json(terms);
+    res.json(sets.map(x => toDto(x)));
 });
 
 router.post("/", (req, res, next) => {

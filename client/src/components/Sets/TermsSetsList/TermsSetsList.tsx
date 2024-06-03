@@ -5,17 +5,14 @@ import { TermsSetCard } from "../TermsSetCard/TermsSetCard.tsx";
 import {fetchSets, selectAllTermsSets} from "@/store/termsSets.ts";
 import {useEffect} from "react";
 import {AppDispatch} from "@/main.tsx";
-import TermSet from "@shared/@types/TermSet";
 import {RootState} from "@/store/types.ts";
+import TermSet from "@/@types/TermSet.ts";
 
 export function TermsSetsList() {
-    const termsStatus = useSelector<RootState>(state => state.entities.termsSets.status);
     const dispatch = useDispatch<AppDispatch>();
-
     useEffect(() => {
-        if (termsStatus === 'idle')
-            dispatch(fetchSets());
-    }, [termsStatus, dispatch]);
+        dispatch(fetchSets());
+    }, [dispatch]);
     const termsSets = useSelector<RootState, TermSet[]>(state => selectAllTermsSets(state));
 
     return (
