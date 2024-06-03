@@ -1,101 +1,48 @@
-import {createSlice} from "@reduxjs/toolkit";
-import trainImage from "@/stories/assets/train.jpg";
+import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
 import * as termsSetsActions from "./termsSets.ts";
 import { v4 as uuidv4 } from "uuid";
 import Term from "@shared/@types/Term.ts";
+import {getTerm, getTermsBySet} from "@/api/termsApi.ts";
+import {RootState} from "@/store/types.ts";
 
-const termsState: Term[] = [
-  {
-    id: "0",
-    expression: "term1",
-    translation: "переклад1",
-    setId: "0"
-  },
-  {
-    id: "1",
-    expression: "term2",
-    expressionImage: trainImage,
-    translation: "переклад2",
-    setId: "0",
-  },
-  {
-    id: "2",
-    expression: "term2",
-    expressionImage: trainImage,
-    translation: "переклад2",
-    translationImage: trainImage,
-    setId: "0",
-  },
-  {
-    id: "3",
-    expression: "term2",
-    translation: "переклад2",
-    translationImage: trainImage,
-    setId: "0",
-  },
-  {
-    id: "4",
-    expression:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et.",
-    translation: "переклад2",
-    translationImage: trainImage,
-    setId: "0",
-  },
-  {
-    id: "5",
-    expression:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et.",
-    translation:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et. Voluptatem provident, reiciendis odio sapiente eveniet dolore architecto illum voluptas reprehenderit minima velit, aliquid, voluptates expedita. Rerum et.",
-    translationImage: trainImage,
-    setId: "0",
-  },
-  {
-    id: "6",
-    expressionImage: trainImage,
-    translation: "train",
-    setId: "0",
-  },
-  {
-    id: "7",
-    expression: "1",
-    translation: "one",
-    translationImage: trainImage,
-    setId: "1",
-  },
-  {
-    id: "8",
-    expression: "2",
-    translation: "two",
-    translationImage: trainImage,
-    setId: "1",
-  },
-  {
-    id: "9",
-    expression: "3",
-    translation: "three",
-    setId: "1",
-  },
-];
+export type TermsState = {
+  terms: Term[],
+  status: 'idle' | 'loading' | 'succeeded' | 'failed',
+  error: string | null
+}
+
+const initialState: TermsState = {
+  terms: [],
+  status: 'idle',
+  error: null
+}
+
+export const fetchTermsBySet = createAsyncThunk('terms/fetchBySet', async (setId: string) => {
+    return { terms: await getTermsBySet(setId), setId };
+})
+
+export const fetchTerm = createAsyncThunk('terms/fetchById', (termId: string) => {
+  return getTerm(termId);
+})
 
 const slice = createSlice({
   name: "terms",
-  initialState: termsState,
+  initialState: initialState,
   reducers: {
-    termUpdated: (terms, action) => {
-      const index = terms.findIndex((bug) => bug.id === action.payload.id);
-      const updatingTerm = terms[index];
-      terms[index] = {
+    termUpdated: (state, action) => {
+      const index = state.terms.findIndex((bug) => bug.id === action.payload.id);
+      const updatingTerm = state.terms[index];
+      state.terms[index] = {
         ...updatingTerm,
         ...action.payload,
         isNew: false,
       };
     },
-    termDeleted: (terms, action) => {
-      return terms.filter((x) => x.id != action.payload);
+    termDeleted: (state, action) => {
+      state.terms = state.terms.filter((x) => x.id != action.payload);
     },
-    emptyTermAdded: (terms, action) => {
-      terms.push({
+    emptyTermAdded: (state, action) => {
+      state.terms.push({
         id: uuidv4(),
         expression: "",
         translation: "",
@@ -105,8 +52,21 @@ const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(termsSetsActions.termsSetDeleted, (terms, action) => {
-      return terms.filter((term) => term.setId !== action.payload);
+    builder.addCase(termsSetsActions.termsSetDeleted, (state, action) => {
+      state.terms = state.terms.filter((term) => term.setId !== action.payload);
+    })
+    .addCase(fetchTermsBySet.pending, (state) => {
+      state.status = "loading"
+    })
+    .addCase(fetchTermsBySet.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      state.terms = state.terms
+          .filter(x => x.setId !== action.payload.setId)
+          .concat(action.payload.terms);
+    })
+    .addCase(fetchTermsBySet.rejected, (state, action) => {
+      state.status = 'failed'
+      state.error = action.error.message || null
     });
   },
 });
@@ -114,3 +74,19 @@ const slice = createSlice({
 export const { termUpdated, termDeleted, emptyTermAdded } = slice.actions;
 
 export default slice.reducer;
+
+export const selectTermsBySetId = createSelector(
+    [
+        (state: RootState) => state.entities.terms.terms,
+        (_: any, termsSetId: string) => termsSetId
+    ],
+    (terms: Term[], termsSetId) => terms.filter((x) => x.setId === termsSetId)
+);
+
+export const selectTermById = createSelector(
+    [
+      (state: RootState) => state.entities.terms.terms,
+      (_: any, termId: string) => termId
+    ],
+    (terms: Term[], termId) => terms.find((x) => x.id === termId)
+);

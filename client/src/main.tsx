@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./contexts/AuthContext/AuthContext.tsx";
 
 const store = createStore();
+export type AppDispatch = typeof store.dispatch;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>

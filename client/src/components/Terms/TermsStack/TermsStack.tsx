@@ -1,18 +1,12 @@
 import styles from "./TermsStack.module.css";
-import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import TermCard from "../TermCard/TermCard.tsx";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import ConfirmButton from "../../Buttons/ConfirmButton.tsx";
 import RejectButton from "../../Buttons/RejectButton.tsx";
-import {Term} from "@/store/types.ts";
-
-const selectTermsFromSet = createSelector(
-  (state) => state.entities.terms,
-  (_, termsSetId) => termsSetId,
-  (terms: Term[], termsSetId) => terms.filter((x) => x.setId === termsSetId)
-);
+import Term from "@shared/@types/Term";
+import {selectTermsBySetId} from "@/store/terms.ts";
 
 type CardState = "active" | "deferring" | "discarding";
 
@@ -26,7 +20,7 @@ type StackCard = Term & {
 }
 
 export function TermsStack({ termsSetId, onStackFinished }: TermsStackProps) {
-  const terms = useSelector((state) => selectTermsFromSet(state, termsSetId));
+  const terms = useSelector((state) => selectTermsBySetId(state, termsSetId));
   const [stack, setStack] = useState<StackCard[]>(
     [...terms].reverse().map((x) => {
       return { ...x, state: "active" };

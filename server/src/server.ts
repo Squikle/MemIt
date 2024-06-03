@@ -5,11 +5,13 @@ import authRouter from "./routes/auth";
 import setsRouter from "./routes/sets";
 import termsRouter from "./routes/terms";
 import {errorHandler} from "./middlewares/errorHandler";
+import cors from "cors";
 
 const port = 80;
 const app = express();
 const distPath = path.resolve(__dirname, "..", "..", "client", "dist");
 
+app.use(cors())
 app.use(express.static(distPath));
 app.use(bodyParser.json());
 

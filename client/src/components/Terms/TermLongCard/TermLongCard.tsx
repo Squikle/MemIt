@@ -1,27 +1,26 @@
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from "react";
 import styles from "./TermLongCard.module.css";
 import { TermLongCardSide } from "./TermLongCardSide.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { termUpdated, termDeleted } from "../../../store/terms.ts";
+import {termUpdated, termDeleted, selectTermById} from "../../../store/terms.ts";
 import { Modal } from "../../Modal/Modal.tsx";
 import DeleteButton from "../../Buttons/DeleteButton.tsx";
 import EditSaveButton from "../../Buttons/EditSaveButton/EditSaveButton.tsx";
-import {RootState, Term} from "@/store/types.ts";
+import {AppDispatch} from "@/main.tsx";
 
 type Props = {
   termId: string
 }
 
 function TermLongCard({ termId }: Props) {
-  const term = useSelector<RootState, Term>((state) =>
-    state.entities.terms.find((x) => x.id === termId)!
-  );
-  const [isEditing, setIsEditing] = useState(term!.isNew || false);
+  const term = useSelector((state) => selectTermById(state, termId));
+  const [isEditing, setIsEditing] = useState(term?.isNew || false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+
 
   const editExpressionRef = useRef<HTMLDivElement>(null);
   const editTranslationRef = useRef<HTMLDivElement>(null);
-  const dispatch = useDispatch();
 
   const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isEditing) {
@@ -48,7 +47,7 @@ function TermLongCard({ termId }: Props) {
   };
 
   const handleRemoveClick = () => {
-    if (term.isNew) deleteCard();
+    if (term?.isNew) deleteCard();
     else setIsDeleting(true);
   };
 
@@ -95,14 +94,14 @@ function TermLongCard({ termId }: Props) {
 
       <div className={styles.cardContent}>
         <TermLongCardSide
-          text={term.expression}
-          image={term.expressionImage}
+          text={term?.expression}
+          image={term?.expressionImage}
           isEditing={isEditing}
           editTextRef={editExpressionRef}
         ></TermLongCardSide>
         <TermLongCardSide
-          text={term.translation}
-          image={term.translationImage}
+          text={term?.translation}
+          image={term?.translationImage}
           isEditing={isEditing}
           editTextRef={editTranslationRef}
         ></TermLongCardSide>

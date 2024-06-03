@@ -1,27 +1,14 @@
 import styles from "./TermsSetCard.module.css";
 import { useSelector } from "react-redux";
-import { createSelector } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import { termsSetDeleted } from "../../../store/termsSets.ts";
+import {selectTermsSet, termsSetDeleted} from "../../../store/termsSets.ts";
 import ConfirmButton from "../../Buttons/ConfirmButton.tsx";
 import RejectButton from "../../Buttons/RejectButton.tsx";
 import DeleteButton from "../../Buttons/DeleteButton.tsx";
 import React, { useState } from "react";
 import EditButton from "../../Buttons/EditButton.tsx";
 import { useNavigate } from "react-router-dom";
-import {Term, TermSet} from "@/store/types.ts";
-
-const selectTermsSet = createSelector(
-  (state) => state.entities.termsSets,
-  (_, termsSetId) => termsSetId,
-  (terms: TermSet[], termsSetId) => terms.find((x) => x.id === termsSetId)
-);
-
-const selectTermsFromSet = createSelector(
-  (state) => state.entities.terms,
-  (_, termsSetId) => termsSetId,
-  (terms: Term[], termsSetId) => terms.filter((x) => x.setId === termsSetId)
-);
+import {selectTermsBySetId} from "@/store/terms.ts";
 
 type Props = {
   termsSetId: string
@@ -31,7 +18,7 @@ export function TermsSetCard({ termsSetId }: Props) {
   const [isDeleting, setIsDeleting] = useState(false);
   const termsSet = useSelector((state) => selectTermsSet(state, termsSetId));
   const termsCount = useSelector((state) =>
-    selectTermsFromSet(state, termsSetId)
+    selectTermsBySetId(state, termsSetId)
   ).length;
   const dispatch = useDispatch();
   const navigate = useNavigate();

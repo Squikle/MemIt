@@ -1,26 +1,19 @@
 import styles from "./TermsSet.module.css";
 import TermLongCard from "../../Terms/TermLongCard/TermLongCard.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { createSelector } from "@reduxjs/toolkit";
 import TermLongCardPlaceholder from "../../Terms/TermLongCard/TermLongCardPlaceholder.tsx";
-import { emptyTermAdded } from "../../../store/terms.ts";
+import {emptyTermAdded, fetchTermsBySet, selectTermsBySetId} from "../../../store/terms.ts";
 import { useEffect, useRef, useState } from "react";
-import {Term} from "@/store/types.ts";
-
-const selectTerms = createSelector(
-  (state) => state.entities.terms,
-  (_, termsSetId) => termsSetId,
-  (terms: Term[], termsSetId) => terms.filter((x) => x.setId === termsSetId)
-);
+import {AppDispatch} from "@/main.tsx";
 
 type Props = {
   termsSetId: string
 }
 
 export function TermsSet({ termsSetId }: Props) {
-  const terms = useSelector((state) => selectTerms(state, termsSetId));
+  const terms = useSelector((state) => selectTermsBySetId(state, termsSetId));
   const [shouldScroll, setShouldScroll] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const placeHolderRef = useRef<HTMLDivElement>(null);
 
   const handleAddClick = () => {
@@ -32,6 +25,10 @@ export function TermsSet({ termsSetId }: Props) {
   const scrollToBottom = () => {
     placeHolderRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    dispatch(fetchTermsBySet(termsSetId!))
+  }, [termsSetId, dispatch]);
 
   useEffect(() => {
     if (shouldScroll) {

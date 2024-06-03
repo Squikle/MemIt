@@ -18,8 +18,6 @@ function EditSaveButton({ size, onClick, iconClassName, isEditing } : EditSaveBu
   ) : (
     <PencilIcon className={classNames(iconClassName, styles.defaultIcon)} />
   );
-  console.log("icon", icon);
-  console.log("size", size);
 
   return <BaseButton size={size} onClick={onClick} icon={icon}></BaseButton>;
 }

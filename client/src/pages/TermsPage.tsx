@@ -5,9 +5,12 @@ import TermsStack from "../components/Terms/TermsStack/TermsStack.tsx";
 import classNames from "classnames";
 import style from "./Pages.module.css";
 import Confetti from "../components/Particles/Confetti.tsx";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import RestartButton from "../components/Buttons/RestartButton.tsx";
 import termsPageStyle from "./TermsPage.module.css";
+import {useDispatch} from "react-redux";
+import {fetchTermsBySet} from "@/store/terms.ts";
+import {AppDispatch} from "@/main.tsx";
 
 const CONFETTI_DURATION_SEC = 2;
 
@@ -15,6 +18,11 @@ export function TermsPage() {
   const { termsSetId } = useParams();
   const [stackFinished, setStackFinished] = useState(false);
   const [isConfettiPlaying, setIsConfettiPlaying] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchTermsBySet(termsSetId!))
+  }, [termsSetId, dispatch]);
 
   const handleStackFinished = () => {
     setStackFinished(true);

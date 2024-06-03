@@ -66,8 +66,12 @@ let terms: Term[] = [
     },
 ];
 
-export function getFromSet(setId: string) {
+export function getBySetId(setId: string) {
     return terms.filter(x => x.setId === setId);
+}
+
+export function getById(termId: string) {
+    return terms.find(x => x.id === termId);
 }
 
 export function addTerm(term: Term) {

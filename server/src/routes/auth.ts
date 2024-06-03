@@ -28,7 +28,7 @@ router.post("/registration", async (req, res, next) => {
     res.json(tokenResponse);
 });
 
-router.post("/verifyToken", async (req, res, next) => {
+router.post("/verify", async (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token)
         res.sendStatus(403);

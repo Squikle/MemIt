@@ -1,11 +1,11 @@
 import axios, {InternalAxiosRequestConfig} from "axios";
 
 const host = axios.create({
-  baseURL: "api/",
+  baseURL: import.meta.env.VITE_HOST + "api/",
 });
 
 const authHost = axios.create({
-  baseURL: "api/",
+  baseURL: import.meta.env.VITE_HOST + "api/",
 });
 
 const authInterceptor = (config: InternalAxiosRequestConfig) => {

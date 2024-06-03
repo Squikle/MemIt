@@ -1,4 +1,4 @@
-import { host } from ".";
+import {authHost, host} from ".";
 
 export const registration = async (email: string, password: string) => {
   try {
@@ -27,5 +27,5 @@ export const login = async (email: string, password: string) => {
 };
 
 export const verify = async () => {
-  await host.post("/auth/verify");
+  await authHost.post("/auth/verify");
 };

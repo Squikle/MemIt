@@ -1,13 +1,24 @@
 import styles from "./TermsSetsList.module.css";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 import { TermsSetCard } from "../TermsSetCard/TermsSetCard.tsx";
-import {RootState, TermSet} from "@/store/types.ts";
+import {fetchSets, selectAllTermsSets} from "@/store/termsSets.ts";
+import {useEffect} from "react";
+import {AppDispatch} from "@/main.tsx";
+import TermSet from "@shared/@types/TermSet";
+import {RootState} from "@/store/types.ts";
 
 export function TermsSetsList() {
-  const termsSets = useSelector<RootState, TermSet[]>((state) => state.entities.termsSets);
+    const termsStatus = useSelector<RootState>(state => state.entities.termsSets.status);
+    const dispatch = useDispatch<AppDispatch>();
 
-  return (
+    useEffect(() => {
+        if (termsStatus === 'idle')
+            dispatch(fetchSets());
+    }, [termsStatus, dispatch]);
+    const termsSets = useSelector<RootState, TermSet[]>(state => selectAllTermsSets(state));
+
+    return (
     <div className={styles.wordsContainer}>
       <ul>
           {termsSets?.map((x) => {

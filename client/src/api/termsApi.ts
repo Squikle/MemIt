@@ -1,24 +1,29 @@
-import { host } from ".";
+import {authHost} from ".";
 import Term from "@shared/@types/Term";
 
-export const getTerms = async (setId: string) => {
+export const getTermsBySet = async (setId: string) => {
     const params = new URLSearchParams();
     params.append("setId", setId);
 
-    const response = await host.post(`/terms`, {
+    const response = await authHost.get(`/terms`, {
         params: params
     });
     return response.data as Term[];
 };
 
+export const getTerm = async (termId: string) => {
+    const response = await authHost.get(`/terms/${termId}`);
+    return response.data as Term;
+};
+
 export const addTerm = async (term: Term) => {
-    await host.post(`/terms`, term);
+    await authHost.post(`/terms`, term);
 };
 
 export const editTerm = async (term: Term) => {
-    await host.put(`/terms/${term.id}`, term);
+    await authHost.put(`/terms/${term.id}`, term);
 };
 
 export const removeTerm = async (termId: string) => {
-    await host.delete(`/terms/${termId}`);
+    await authHost.delete(`/terms/${termId}`);
 };

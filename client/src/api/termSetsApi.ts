@@ -1,20 +1,19 @@
-import { host } from ".";
-import Term from "@shared/@types/Term.ts";
+import {authHost} from ".";
 import TermSet from "@shared/@types/TermSet.ts";
 
 export const getSets = async () => {
-    const response = await host.post(`/sets`);
-    return response.data as Term[];
+    const response = await authHost.get(`/sets`);
+    return response.data as TermSet[];
 };
 
 export const addSet = async (set: TermSet) => {
-    await host.post(`/sets/`, set);
+    await authHost.post(`/sets/`, set);
 };
 
 export const editTerm = async (set: TermSet) => {
-    await host.put(`/sets/${set.id}`, set);
+    await authHost.put(`/sets/${set.id}`, set);
 };
 
 export const removeTerm = async (setId: string) => {
-    await host.delete(`/sets/${setId}`);
+    await authHost.delete(`/sets/${setId}`);
 };
