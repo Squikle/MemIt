@@ -74,20 +74,17 @@ export function getById(termId: string) {
     return terms.find(x => x.id === termId);
 }
 
-export function addTerm(term: Term) {
-    if (!term.id)
+export function addOrUpdateTerm(term: Term) {
+    if (!term.id) {
         term.id = uuidv4()
-    terms.push(term);
-    return term.id;
-}
+    }
 
-export function editTerm(term: Term) {
-    terms = terms.map(x => {
-        if (x.id === term.id)
-            return term;
-
-        return x;
-    })
+    let termIndex = terms.findIndex(x => x.id === term.id);
+    if (termIndex === -1) {
+        terms.push(term);
+    } else {
+        terms[termIndex] = term;
+    }
     return term.id;
 }
 

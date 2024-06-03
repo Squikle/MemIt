@@ -2,7 +2,7 @@ import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
 import * as termsSetsActions from "./termsSets.ts";
 import { v4 as uuidv4 } from "uuid";
 import Term from "@shared/@types/Term.ts";
-import {getTerm, getTermsBySet} from "@/api/termsApi.ts";
+import {addOrUpdateTerm, getTerm, getTermsBySet} from "@/api/termsApi.ts";
 import {RootState} from "@/store/types.ts";
 
 export type TermsState = {
@@ -25,19 +25,17 @@ export const fetchTerm = createAsyncThunk('terms/fetchById', (termId: string) =>
   return getTerm(termId);
 })
 
+export const addNewTerm = createAsyncThunk(
+    'terms/addNew',
+    async (term: Term) => {
+      return { termId: await addOrUpdateTerm(term), term };
+    }
+)
+
 const slice = createSlice({
   name: "terms",
   initialState: initialState,
   reducers: {
-    termUpdated: (state, action) => {
-      const index = state.terms.findIndex((bug) => bug.id === action.payload.id);
-      const updatingTerm = state.terms[index];
-      state.terms[index] = {
-        ...updatingTerm,
-        ...action.payload,
-        isNew: false,
-      };
-    },
     termDeleted: (state, action) => {
       state.terms = state.terms.filter((x) => x.id != action.payload);
     },
@@ -67,11 +65,25 @@ const slice = createSlice({
     .addCase(fetchTermsBySet.rejected, (state, action) => {
       state.status = 'failed'
       state.error = action.error.message || null
-    });
+    })
+    .addCase(addNewTerm.fulfilled, (state, action) => {
+      const index = state.terms.findIndex((term) => term.id === action.payload.termId);
+      if (index === -1) {
+        state.terms.push(action.payload.term);
+        return;
+      }
+
+      const updatingTerm = state.terms[index];
+      state.terms[index] = {
+        ...updatingTerm,
+        ...action.payload.term,
+        isNew: false,
+      };
+    })
   },
 });
 
-export const { termUpdated, termDeleted, emptyTermAdded } = slice.actions;
+export const { termDeleted, emptyTermAdded } = slice.actions;
 
 export default slice.reducer;
 

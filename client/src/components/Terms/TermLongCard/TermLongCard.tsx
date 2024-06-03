@@ -2,11 +2,12 @@ import React, {useRef, useState} from "react";
 import styles from "./TermLongCard.module.css";
 import { TermLongCardSide } from "./TermLongCardSide.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import {termUpdated, termDeleted, selectTermById} from "../../../store/terms.ts";
+import {termDeleted, selectTermById, addNewTerm} from "../../../store/terms.ts";
 import { Modal } from "../../Modal/Modal.tsx";
 import DeleteButton from "../../Buttons/DeleteButton.tsx";
 import EditSaveButton from "../../Buttons/EditSaveButton/EditSaveButton.tsx";
 import {AppDispatch} from "@/main.tsx";
+import Term from "@shared/@types/Term";
 
 type Props = {
   termId: string
@@ -29,13 +30,13 @@ function TermLongCard({ termId }: Props) {
       const newTranslation =
         editTranslationRef.current?.innerText || term?.translation || "";
 
-      dispatch(
-        termUpdated({
-          ...term,
-          expression: newExpression,
-          translation: newTranslation,
-        })
-      );
+      const newTerm: Term = {
+        ...term!,
+        expression: newExpression,
+        translation: newTranslation,
+      };
+      delete newTerm.isNew;
+      dispatch(addNewTerm(newTerm));
     }
 
     setIsEditing((x) => !x);

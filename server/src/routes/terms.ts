@@ -1,5 +1,5 @@
 import express from "express";
-import {addTerm, editTerm, getById, getBySetId, removeTerm} from "../controllers/termsController";
+import {addOrUpdateTerm, editTerm, getById, getBySetId, removeTerm} from "../controllers/termsController";
 
 const router = express.Router();
 
@@ -27,14 +27,8 @@ router.get("/:termId", (req, res) => {
     res.json(term);
 });
 
-
-router.post("/", (req, res, next) => {
-    let termId = addTerm({...req.body});
-    res.json({id: termId});
-});
-
-router.put("/:termId", (req, res, next) => {
-    let termId = editTerm({...req.body});
+router.put("/", (req, res, next) => {
+    let termId = addOrUpdateTerm({...req.body});
     res.json({id: termId});
 });
 

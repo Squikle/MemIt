@@ -16,12 +16,9 @@ export const getTerm = async (termId: string) => {
     return response.data as Term;
 };
 
-export const addTerm = async (term: Term) => {
-    await authHost.post(`/terms`, term);
-};
-
-export const editTerm = async (term: Term) => {
-    await authHost.put(`/terms/${term.id}`, term);
+export const addOrUpdateTerm = async (term: Term) => {
+    const response = await authHost.put(`/terms`, term);
+    return response.data.id;
 };
 
 export const removeTerm = async (termId: string) => {
