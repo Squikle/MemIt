@@ -1,5 +1,5 @@
 import {authHost} from ".";
-import Term from "@/@types/Term.ts";
+import TermDto from "@shared/@types/dto/TermDto";
 
 export const getTermsBySet = async (setId: string) => {
     const params = new URLSearchParams();
@@ -8,15 +8,15 @@ export const getTermsBySet = async (setId: string) => {
     const response = await authHost.get(`/terms`, {
         params: params
     });
-    return response.data as Term[];
+    return response.data as TermDto[];
 };
 
 export const getTerm = async (termId: string) => {
     const response = await authHost.get(`/terms/${termId}`);
-    return response.data as Term;
+    return response.data as TermDto;
 };
 
-export const addOrUpdateTerm = async (term: Term) => {
+export const addOrUpdateTerm = async (term: TermDto) => {
     const response = await authHost.put(`/terms`, term);
     return response.data.id;
 };

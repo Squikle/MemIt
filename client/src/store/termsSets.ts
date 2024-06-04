@@ -1,10 +1,10 @@
 import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
 import {getSets, removeSet as removeSetApi} from "@/api/termSetsApi.ts";
 import {RootState} from "@/store/types.ts";
-import TermSet from "@/@types/TermSet.ts";
+import TermsSet, {toDomain} from "@/@types/TermsSet.ts";
 
 export type TermsSetsState = {
-  sets: TermSet[],
+  sets: TermsSet[],
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null
 }
@@ -15,8 +15,9 @@ const initialState: TermsSetsState = {
   error: null
 }
 
-export const fetchSets = createAsyncThunk('sets/fetchAll', () => {
-  return getSets();
+export const fetchSets = createAsyncThunk('sets/fetchAll', async () => {
+  const sets = await getSets();
+  return sets.map(x => toDomain(x));
 })
 
 export const removeSet = createAsyncThunk('sets/remove', async (setId: string) => {

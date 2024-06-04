@@ -2,12 +2,12 @@ import React, {useRef, useState} from "react";
 import styles from "./TermLongCard.module.css";
 import { TermLongCardSide } from "./TermLongCardSide.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import {selectTermById, addNewTerm, removeTerm} from "../../../store/terms.ts";
+import {selectTermById, addNewTerm, removeTerm} from "@/store/terms.ts";
 import { Modal } from "../../Modal/Modal.tsx";
 import DeleteButton from "../../Buttons/DeleteButton.tsx";
 import EditSaveButton from "../../Buttons/EditSaveButton/EditSaveButton.tsx";
 import {AppDispatch} from "@/main.tsx";
-import Term from "@shared/@types/Term";
+import Term from "@/@types/Term.ts";
 
 type Props = {
   termId: string
@@ -35,7 +35,6 @@ function TermLongCard({ termId }: Props) {
         expression: newExpression,
         translation: newTranslation,
       };
-      delete newTerm.isNew;
       dispatch(addNewTerm(newTerm));
     }
 

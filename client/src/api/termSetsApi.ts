@@ -1,12 +1,12 @@
 import {authHost} from ".";
-import TermSet from "@shared/@types/TermSetDto.ts";
+import TermsSetDto from "@shared/@types/dto/TermsSetDto";
 
 export const getSets = async () => {
     const response = await authHost.get(`/sets`);
-    return response.data as TermSet[];
+    return response.data as TermsSetDto[];
 };
 
-export const addOrUpdateSet = async (set: TermSet) => {
+export const addOrUpdateSet = async (set: TermsSetDto) => {
     const response = await authHost.put(`/sets`, set);
     return response.data.id;
 };

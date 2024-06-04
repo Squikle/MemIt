@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import classNames from "classnames";
 import ConfirmButton from "../../Buttons/ConfirmButton.tsx";
 import RejectButton from "../../Buttons/RejectButton.tsx";
-import Term from "@shared/@types/Term";
+import Term from "@/@types/Term.ts";
 
 type CardState = "active" | "deferring" | "discarding";
 

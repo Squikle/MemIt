@@ -6,14 +6,14 @@ import {fetchSets, selectAllTermsSets} from "@/store/termsSets.ts";
 import {useEffect} from "react";
 import {AppDispatch} from "@/main.tsx";
 import {RootState} from "@/store/types.ts";
-import TermSet from "@/@types/TermSet.ts";
+import TermsSet from "@/@types/TermsSet.ts";
 
 export function TermsSetsList() {
     const dispatch = useDispatch<AppDispatch>();
     useEffect(() => {
         dispatch(fetchSets());
     }, [dispatch]);
-    const termsSets = useSelector<RootState, TermSet[]>(state => selectAllTermsSets(state));
+    const termsSets = useSelector<RootState, TermsSet[]>(state => selectAllTermsSets(state));
 
     return (
     <div className={styles.wordsContainer}>

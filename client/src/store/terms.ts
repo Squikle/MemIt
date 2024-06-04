@@ -1,9 +1,9 @@
 import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
 import * as termsSetsActions from "./termsSets.ts";
-import { v4 as uuidv4 } from "uuid";
 import {addOrUpdateTerm, getTerm, getTermsBySet, removeTerm as removeTermApi} from "@/api/termsApi.ts";
 import {RootState} from "@/store/types.ts";
-import Term from "@/@types/Term.ts";
+import Term, {toDomain, toDto} from "@/@types/Term.ts";
+import generateId from "@shared/utils/generateId";
 
 export type TermsState = {
   terms: Term[],
@@ -18,17 +18,21 @@ const initialState: TermsState = {
 }
 
 export const fetchTermsBySet = createAsyncThunk('terms/fetchBySet', async (setId: string) => {
-    return { terms: await getTermsBySet(setId), setId };
+  const terms = await getTermsBySet(setId);
+  const asDomain = terms.map(x => toDomain(x));
+  return { terms: asDomain, setId };
 })
 
-export const fetchTerm = createAsyncThunk('terms/fetchById', (termId: string) => {
-  return getTerm(termId);
+export const fetchTerm = createAsyncThunk('terms/fetchById', async (termId: string) => {
+  const term = await getTerm(termId);
+  return toDomain(term);
 })
 
 export const addNewTerm = createAsyncThunk(
     'terms/addNew',
     async (term: Term) => {
-      return { termId: await addOrUpdateTerm(term), term };
+      const asDto = toDto(term);
+      return { termId: await addOrUpdateTerm(asDto), term };
     }
 )
 
@@ -45,7 +49,7 @@ const slice = createSlice({
   reducers: {
     emptyTermAdded: (state, action) => {
       state.terms.push({
-        id: uuidv4(),
+        id: generateId(),
         expression: "",
         translation: "",
         setId: action.payload.setId,

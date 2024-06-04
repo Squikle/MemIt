@@ -1,7 +1,7 @@
 import styles from "./TermsSetCard.module.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import {removeSet, selectTermsSet} from "../../../store/termsSets.ts";
+import {removeSet, selectTermsSet} from "@/store/termsSets.ts";
 import ConfirmButton from "../../Buttons/ConfirmButton.tsx";
 import RejectButton from "../../Buttons/RejectButton.tsx";
 import DeleteButton from "../../Buttons/DeleteButton.tsx";
@@ -45,7 +45,7 @@ export function TermsSetCard({ termsSetId }: Props) {
       <div className={styles.content}>
         <p>{termsSet?.name}</p>
         <p className={styles.wordsCount}>
-          ({termsSet.termsCount ? `${termsSet.termsCount} words` : "empty"})
+          ({termsSet?.termsCount ? `${termsSet.termsCount} words` : "empty"})
         </p>
       </div>
       <div className={styles.buttons}>
