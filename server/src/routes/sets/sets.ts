@@ -1,7 +1,7 @@
 import express from "express";
 import {addSet, editSet, getAll, removeSet} from "../../controllers/setsController";
 import TermsSet from "../../@types/domain/TermsSet";
-import {toDto, toDomain} from "./convertor";
+import {toDomain, toDto} from "./convertor";
 
 const router = express.Router();
 

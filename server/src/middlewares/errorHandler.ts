@@ -1,5 +1,5 @@
 import e, {ErrorRequestHandler} from "express";
-import Error from "../@types/dto/ErrorDto";
+import Error from "../../../shared/src/@types/dto/ErrorDto";
 import {UserError} from "../@types/UserError";
 
 export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {

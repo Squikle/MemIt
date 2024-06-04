@@ -1,5 +1,5 @@
 import TermsSet from "../../@types/domain/TermsSet";
-import TermsSetDto from "../../@types/dto/TermsSetDto";
+import TermsSetDto from "@shared/@types/dto/TermsSetDto";
 
 export function toDto(termSet: TermsSet): TermsSetDto {
     return {

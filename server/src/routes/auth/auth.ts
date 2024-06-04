@@ -1,7 +1,7 @@
 import express from "express";
-import {toDomain} from "./convertor";
 import {authUser, registerUser, verifyToken} from "../../controllers/authController";
-import TokenDto from "../../@types/dto/TokenDto";
+import TokenDto from "../../../../shared/src/@types/dto/TokenDto";
+import {toDomain} from "./convertor";
 
 const router = express.Router();
 

@@ -81,9 +81,6 @@ export async function getCountBySetId(setId: string) {
 }
 
 export async function addOrUpdateTerm(term: Term) {
-    console.log(term);
-    console.log(toDal(term));
-
     await TermModel.updateOne({_id: term.id}, toDal(term), {upsert: true});
     return term.id;
 }

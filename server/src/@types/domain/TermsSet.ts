@@ -1,4 +1,4 @@
-import {generateId} from "../../utils/generateId";
+import {generateId} from "@shared/utils";
 
 class TermsSet {
     id: string;

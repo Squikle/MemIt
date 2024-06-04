@@ -1,6 +1,6 @@
-import TermDto from "../../../../shared/src/@types/api/TermDto";
 import Term from "../../@types/domain/Term";
-import {generateId} from "../../utils/generateId";
+import TermDto from "@shared/@types/dto/TermDto";
+
 export function toDto(term: Term): TermDto {
     return {
         setId: term.setId,
@@ -13,8 +13,8 @@ export function toDto(term: Term): TermDto {
 }
 export function toDomain(dto: TermDto): Term {
     return new Term(
-        generateId(), // todo: take from dto but objectId
-        generateId(),
+        dto.id,
+        dto.setId,
         dto.expression,
         dto.expressionImage,
         dto.translation,

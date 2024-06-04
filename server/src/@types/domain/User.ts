@@ -1,5 +1,5 @@
 import {createHash} from "node:crypto";
-import {generateId} from "../../utils/generateId";
+import {generateId} from "@shared/utils";
 
 class User {
     id: string;

@@ -2,8 +2,6 @@ import mongoose, {Types, HydratedDocument} from "mongoose";
 import User from "../@types/domain/User";
 import {UserDal} from "../@types/dal/UserDal";
 
-
-
 const userSchema = new mongoose.Schema<UserDal>({
     email: String,
     password: String,

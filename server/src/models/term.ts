@@ -20,10 +20,10 @@ export const toDomain = (dal: TermDal): Term => {
     return new Term(
         dal.id.toString(),
         dal.setId.toString(),
-        dal.translationImage,
-        dal.expressionImage,
         dal.expression,
-        dal.translation
+        dal.expressionImage,
+        dal.translation,
+        dal.translationImage
     );
 }
 export const toDal = (term: Term): HydratedDocument<TermDal> => {
