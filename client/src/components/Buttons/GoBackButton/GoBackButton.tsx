@@ -1,9 +1,9 @@
 import BaseButton from "../BaseButton.tsx";
 import { LeftArrowIcon } from "../../Icons/LeftArrowIcon.tsx";
 import classNames from "classnames";
-import goBackStyles from "./GoBackButton.module.css";
+import goBackStyles from "./GoBackButton.module.scss";
 import { useNavigate } from "react-router-dom";
-import styles from "../Buttons.module.css";
+import styles from "../Buttons.module.scss";
 import {ButtonProps} from "@/components/Buttons/types.ts";
 
 type BackButtonProps = Omit<ButtonProps, 'onClick'> & {

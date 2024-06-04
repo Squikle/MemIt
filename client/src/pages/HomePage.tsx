@@ -1,4 +1,4 @@
-import "./pageStyles.css";
+import "./pageStyles.scss";
 
 export function HomePage() {
   return (

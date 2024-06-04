@@ -1,4 +1,4 @@
-import styles from "./TermsSet.module.css";
+import styles from "./TermsSet.module.scss";
 import TermLongCard from "../../Terms/TermLongCard/TermLongCard.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import TermLongCardPlaceholder from "../../Terms/TermLongCard/TermLongCardPlaceholder.tsx";

@@ -1,4 +1,4 @@
-import "./pageStyles.css";
+import "./pageStyles.scss";
 import { TermsSetsList } from "../components/Sets/TermsSetsList/TermsSetsList.tsx";
 import classNames from "classnames";
 

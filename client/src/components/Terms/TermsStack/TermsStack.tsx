@@ -1,4 +1,4 @@
-import styles from "./TermsStack.module.css";
+import styles from "./TermsStack.module.scss";
 import TermCard from "../TermCard/TermCard.tsx";
 import { useEffect, useState } from "react";
 import classNames from "classnames";

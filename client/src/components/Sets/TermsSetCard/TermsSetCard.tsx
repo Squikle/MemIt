@@ -1,4 +1,4 @@
-import styles from "./TermsSetCard.module.css";
+import styles from "./TermsSetCard.module.scss";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {removeSet, selectTermsSet} from "@/store/termsSets.ts";

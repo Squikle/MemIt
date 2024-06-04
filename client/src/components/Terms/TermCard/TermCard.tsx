@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./TermCard.module.css";
+import styles from "./TermCard.module.scss";
 import { useSelector } from "react-redux";
 import { TermCardSide } from "./TermCardSide.tsx";
 import classNames from "classnames";

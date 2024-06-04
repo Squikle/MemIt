@@ -1,5 +1,5 @@
 import { LoginForm } from "../components/LoginForm/LoginForm.tsx";
-import "./pageStyles.css";
+import "./pageStyles.scss";
 
 export function LoginPage() {
   const style = {

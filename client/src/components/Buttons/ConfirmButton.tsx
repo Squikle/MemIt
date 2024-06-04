@@ -1,7 +1,7 @@
 import BaseButton from "./BaseButton";
 import { CheckMarkIcon } from "../Icons/CheckMarkIcon.tsx";
 import classNames from "classnames";
-import styles from "./Buttons.module.css";
+import styles from "./Buttons.module.scss";
 import {ButtonProps} from "@/components/Buttons/types.ts";
 
 function ConfirmButton({ size, onClick, iconClassName } : ButtonProps) {

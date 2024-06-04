@@ -1,4 +1,4 @@
-import styles from "./TermsSetsList.module.css";
+import styles from "./TermsSetsList.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 import { TermsSetCard } from "../TermsSetCard/TermsSetCard.tsx";

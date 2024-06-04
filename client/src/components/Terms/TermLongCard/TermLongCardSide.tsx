@@ -1,4 +1,4 @@
-import styles from "./TermLongCardSide.module.css";
+import styles from "./TermLongCardSide.module.scss";
 import React, {RefObject, useId, useRef} from "react";
 
 type Props = {

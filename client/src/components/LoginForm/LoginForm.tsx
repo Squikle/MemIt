@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import styles from "./LoginForm.module.css";
+import styles from "./LoginForm.module.scss";
 import {FormEvent, useRef, useState} from "react";
 import { login, registration } from "@/api/authApi.ts";
 import { useAuthContext } from "../../contexts/AuthContext/useAuthContext.ts";

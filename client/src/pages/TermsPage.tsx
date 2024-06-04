@@ -1,13 +1,13 @@
-import "./pageStyles.css";
+import "./pageStyles.scss";
 import {useParams} from "react-router-dom";
 import GoBackButton from "../components/Buttons/GoBackButton/GoBackButton.tsx";
 import TermsStack from "../components/Terms/TermsStack/TermsStack.tsx";
 import classNames from "classnames";
-import style from "./Pages.module.css";
+import style from "./Pages.module.scss";
 import Confetti from "../components/Particles/Confetti.tsx";
 import {useEffect, useState} from "react";
 import RestartButton from "../components/Buttons/RestartButton.tsx";
-import termsPageStyle from "./TermsPage.module.css";
+import termsPageStyle from "./TermsPage.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchTermsBySet, selectTermsBySetId} from "@/store/terms.ts";
 import {AppDispatch} from "@/main.tsx";

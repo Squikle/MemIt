@@ -1,4 +1,4 @@
-import styles from "./TermCardSide.module.css";
+import styles from "./TermCardSide.module.scss";
 import classNames from "classnames";
 
 type CardSideProps = {

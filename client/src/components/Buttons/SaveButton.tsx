@@ -1,7 +1,7 @@
 import BaseButton from "./BaseButton";
 import { FloppyDiskIcon } from "../Icons/FloppyDiskIcon.tsx";
 import classNames from "classnames";
-import styles from "./Buttons.module.css";
+import styles from "./Buttons.module.scss";
 import {ButtonProps} from "@/components/Buttons/types.ts";
 
 function SaveButton({ size, onClick, iconClassName } : ButtonProps) {

@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import styles from "./TermLongCard.module.css";
+import styles from "./TermLongCard.module.scss";
 import { TermLongCardSide } from "./TermLongCardSide.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import {selectTermById, addNewTerm, removeTerm} from "@/store/terms.ts";

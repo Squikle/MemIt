@@ -1,7 +1,7 @@
 import BaseButton from "./BaseButton.tsx";
 import { PlusIcon } from "../Icons/PlusIcon.tsx";
 import classNames from "classnames";
-import styles from "./Buttons.module.css";
+import styles from "./Buttons.module.scss";
 import {ButtonProps} from "@/components/Buttons/types.ts";
 
 function AddButton({ size, onClick, iconClassName } : ButtonProps) {

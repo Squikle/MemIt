@@ -1,4 +1,4 @@
-import styles from "./Buttons.module.css";
+import styles from "./Buttons.module.scss";
 import React, {ReactNode} from "react";
 
 type Props = {

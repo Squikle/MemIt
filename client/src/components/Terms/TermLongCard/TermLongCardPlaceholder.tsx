@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import styles from "./TermLongCard.module.css";
+import styles from "./TermLongCard.module.scss";
 import AddButton from "../../Buttons/AddButton.tsx";
 
 type Props = {

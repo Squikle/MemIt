@@ -1,7 +1,7 @@
 import BaseButton from "./BaseButton";
 import { TrashIcon } from "../Icons/TrashIcon.tsx";
 import classNames from "classnames";
-import styles from "./Buttons.module.css";
+import styles from "./Buttons.module.scss";
 import {ButtonProps} from "@/components/Buttons/types.ts";
 
 function DeleteButton({ size, onClick, iconClassName } : ButtonProps) {

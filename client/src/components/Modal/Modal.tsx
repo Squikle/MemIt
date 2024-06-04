@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import cssStyles from "./Modal.module.css";
+import cssStyles from "./Modal.module.scss";
 import {CSSProperties, ReactNode} from "react";
 
 export type ModalProps = {

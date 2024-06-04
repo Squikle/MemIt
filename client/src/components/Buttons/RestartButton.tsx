@@ -1,6 +1,6 @@
 import BaseButton from "./BaseButton";
 import classNames from "classnames";
-import styles from "./Buttons.module.css";
+import styles from "./Buttons.module.scss";
 import { ArrowsRotateIcon } from "../Icons/ArrowsRotateIcon.tsx";
 import {ButtonProps} from "@/components/Buttons/types.ts";
 
