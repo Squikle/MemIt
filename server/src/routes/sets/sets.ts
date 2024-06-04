@@ -1,12 +1,12 @@
 import express from "express";
 import {addSet, editSet, getAll, removeSet} from "../../controllers/setsController";
-import toDto from "./convertor";
 import TermsSet from "../../@types/domain/TermsSet";
+import {toDto, toDomain} from "./convertor";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    let sets: TermsSet[] = getAll();
+router.get("/", async (req, res) => {
+    let sets: TermsSet[] = await getAll();
     if (!sets || sets.length <= 0) {
         res.sendStatus(404);
         return;
@@ -15,18 +15,18 @@ router.get("/", (req, res) => {
     res.json(sets.map(x => toDto(x)));
 });
 
-router.post("/", (req, res, next) => {
-    let setId = addSet({...req.body});
+router.post("/", async (req, res, next) => {
+    let setId = await addSet(toDomain(req.body));
     res.json({id: setId});
 });
 
-router.put("/:termId", (req, res, next) => {
-    let setId = editSet({...req.body});
+router.put("/:termId", async (req, res, next) => {
+    let setId = await editSet(toDomain(req.body));
     res.json({id: setId});
 });
 
-router.delete("/:termId", (req, res, next) => {
-    let setId = removeSet(req.params.termId);
+router.delete("/:termId", async (req, res, next) => {
+    let setId = await removeSet(req.params.termId);
     res.json({id: setId});
 });
 

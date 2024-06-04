@@ -1,5 +1,5 @@
-type Error = {
+type ErrorDto = {
     status: number,
     message: string
 }
-export default Error;
+export default ErrorDto;

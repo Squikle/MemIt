@@ -1,7 +1,7 @@
 import express from "express";
 import {toDomain} from "./convertor";
 import {authUser, registerUser, verifyToken} from "../../controllers/authController";
-import Token from "../../@types/domain/Token";
+import TokenDto from "../../@types/dto/TokenDto";
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.post("/login", async (req, res, next) => {
         return next(loginResult.error);
     }
 
-    const tokenResponse: Token = {
+    const tokenResponse: TokenDto = {
         token: loginResult.value
     }
     res.json(tokenResponse);
@@ -23,7 +23,7 @@ router.post("/registration", async (req, res, next) => {
         return next(registerResult.error);
     }
 
-    const tokenResponse: Token = {
+    const tokenResponse: TokenDto = {
         token: registerResult.value
     }
     res.json(tokenResponse);

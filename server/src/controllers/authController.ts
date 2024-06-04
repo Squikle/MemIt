@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import {err, ok, Result} from "neverthrow";
 import UserModel, { toDal } from "../models/user"
 import User from "../@types/domain/User";
-import {UserError} from "../@types/domain/UserError";
+import {UserError} from "../@types/UserError";
 
 export async function authUser(user: User) {
     const userModel = await UserModel.findOne({email: user.email});

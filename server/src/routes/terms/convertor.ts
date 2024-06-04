@@ -1,6 +1,7 @@
 import TermDto from "../../../../shared/src/@types/api/TermDto";
 import Term from "../../@types/domain/Term";
-export default function toDto(term: Term): TermDto {
+import {generateId} from "../../utils/generateId";
+export function toDto(term: Term): TermDto {
     return {
         setId: term.setId,
         expressionImage: term.expressionImage,
@@ -9,4 +10,13 @@ export default function toDto(term: Term): TermDto {
         translation: term.translationImage,
         id: term.id
     }
+}
+export function toDomain(dto: TermDto): Term {
+    return new Term(
+        generateId(), // todo: take from dto but objectId
+        generateId(),
+        dto.expression,
+        dto.expressionImage,
+        dto.translation,
+        dto.translationImage);
 }

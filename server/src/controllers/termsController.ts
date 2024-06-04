@@ -1,6 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-import TermDto from "../../../shared/src/@types/api/TermDto";
 import Term from "../@types/domain/Term";
+import TermModel, {toDal, toDomain} from "../models/term"
 
 let terms: Term[] = [
     {
@@ -67,33 +66,29 @@ let terms: Term[] = [
     },
 ];
 
-export function getBySetId(setId: string) {
-    return terms.filter(x => x.setId === setId);
+export async function getBySetId(setId: string) {
+    const dal = await TermModel.find({setId: setId});
+    return dal && dal.map(x => toDomain(x));
 }
 
-export function getById(termId: string) {
-    return terms.find(x => x.id === termId);
+export async function getById(termId: string) {
+    const dal = await TermModel.findById(termId);
+    return dal && toDomain(dal);
 }
 
-export function getCountBySetId(setId: string) {
-    return terms.filter(x => x.setId === setId).length;
+export async function getCountBySetId(setId: string) {
+    return TermModel.countDocuments({setId: setId});
 }
 
-export function addOrUpdateTerm(term: TermDto) {
-    if (!term.id) {
-        term.id = uuidv4()
-    }
+export async function addOrUpdateTerm(term: Term) {
+    console.log(term);
+    console.log(toDal(term));
 
-    let termIndex = terms.findIndex(x => x.id === term.id);
-    if (termIndex === -1) {
-        terms.push(term);
-    } else {
-        terms[termIndex] = term;
-    }
+    await TermModel.updateOne({_id: term.id}, toDal(term), {upsert: true});
     return term.id;
 }
 
-export function removeTerm(termId: string) {
-    terms = terms.filter(x => x.id !== termId);
+export async function removeTerm(termId: string) {
+    await TermModel.findByIdAndDelete(termId);
     return termId;
 }

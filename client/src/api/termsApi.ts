@@ -1,5 +1,5 @@
 import {authHost} from ".";
-import Term from "@shared/@types/Term";
+import Term from "@/@types/Term.ts";
 
 export const getTermsBySet = async (setId: string) => {
     const params = new URLSearchParams();

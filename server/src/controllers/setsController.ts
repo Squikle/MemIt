@@ -1,7 +1,6 @@
-import {v4 as uuidv4} from "uuid";
-import TermSetDto from "../../../shared/src/@types/api/TermSetDto";
 import {getCountBySetId} from "./termsController";
 import TermsSet from "../@types/domain/TermsSet";
+import TermsSetModel, {toDal, toDomain} from "../models/termsSet"
 
 let termsSets: TermsSet[] = [
     {
@@ -18,31 +17,27 @@ let termsSets: TermsSet[] = [
     },
 ];
 
-export function getAll() {
-    return termsSets.map(x => {
-        x.termsCount = getCountBySetId(x.id)
-        return x;
+export async function getAll() {
+    const sets = await TermsSetModel.find();
+    const promises = sets.map(async x => {
+        const termsCount = await getCountBySetId(x.id); //todo: optimize with single grouping query
+        return toDomain(x, termsCount);
     });
+    return await Promise.all(promises);
 }
 
-export function addSet(termSet: TermSetDto) {
-    if (!termSet.id)
-        termSet.id = uuidv4()
-    termsSets.push(termSet);
+export async function addSet(termsSet: TermsSet) {
+    const dal = toDal(termsSet)
+    await dal.save();
+    return dal.id;
+}
+
+export async function editSet(termSet: TermsSet) {
+    await TermsSetModel.findByIdAndUpdate(termSet.id, toDal(termSet));
     return termSet.id;
 }
 
-export function editSet(termSet: TermSetDto) {
-    termsSets = termsSets.map(x => {
-        if (x.id === termSet.id)
-            x = termSet;
-
-        return x;
-    })
-    return termSet.id;
-}
-
-export function removeSet(setId: string) {
-    termsSets = termsSets.filter(x => x.id !== setId);
+export async function removeSet(setId: string) {
+    await TermsSetModel.findByIdAndDelete(setId);
     return setId;
 }
