@@ -6,7 +6,8 @@ import termsRouter from "./routes/terms/terms";
 import authRouter from "./routes/auth/auth";
 import {errorHandler} from "./middlewares/errorHandler";
 import cors from "cors";
-import mongoose, {mongo} from "mongoose";
+import mongoose from "mongoose";
+import {requireAuth} from "./middlewares/requireAuth";
 
 const app = express();
 const distPath = path.resolve(__dirname, "..", "..", "client", "dist");
@@ -16,8 +17,8 @@ app.use(express.static(distPath));
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRouter);
-app.use('/api/sets', setsRouter);
-app.use('/api/terms', termsRouter);
+app.use('/api/sets', requireAuth, setsRouter);
+app.use('/api/terms', requireAuth, termsRouter);
 app.use('/api/*', (_, res) => res.sendStatus(404));
 
 app.get("*", (req, res) => {
