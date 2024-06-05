@@ -27,6 +27,7 @@ jobs:
         run: |
           echo "MAJOR=$(jq -r '.version' package.json | cut -d'.' -f1)" >> $GITHUB_ENV
           echo "MINOR=$(jq -r '.version' package.json | cut -d'.' -f2)" >> $GITHUB_ENV
+          echo "VERSION=${MAJOR}.${MINOR}" >> $GITHUB_ENV
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
@@ -34,8 +35,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+
+      - name: Log new version
+        run: |
+          echo "Building version: $VERSION"
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: squikle/memit:${{ env.MAJOR }}.${{ env.MINOR }}
+          tags: squikle/memit:${{ env.VERSION }}
