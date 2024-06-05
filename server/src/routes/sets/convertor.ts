@@ -1,14 +1,26 @@
-import TermsSet from "../../@types/domain/TermsSet";
+import TermsSet, {TermsSetAccess} from "../../@types/domain/TermsSet";
 import TermsSetDto from "@shared/@types/dto/TermsSetDto";
+import TermsSetAccessDto from "@shared/@types/dto/TermsSetAccessDto";
 
-export function toDto(termSet: TermsSet): TermsSetDto {
+export function toDto(termsSet: TermsSet): TermsSetDto {
     return {
-        id: termSet.id,
-        name: termSet.name,
-        termsCount: termSet.termsCount || 0
+        id: termsSet.id,
+        name: termsSet.name,
+        termsCount: termsSet.termsCount || 0,
+        access: termsSet.access.map(x => accessToDto(x))
     }
 }
 
-export function toDomain(dto: TermsSetDto): TermsSet {
-    return TermsSet.createFromExisting(dto.id, dto.name);
+function accessToDto(termsSetAccess: TermsSetAccess): TermsSetAccessDto {
+    return {
+        access: termsSetAccess.access,
+        userId: termsSetAccess.userId,
+    }
+}
+
+export function toDomain(dto: TermsSetDto, userId: string): TermsSet {
+    const newSet = TermsSet.createNew(dto.name);
+    const access = TermsSetAccess.createNew(userId, newSet.id, "ReadWrite");
+    newSet.withAccess([access]);
+    return newSet;
 }

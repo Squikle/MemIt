@@ -16,12 +16,12 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res, next) => {
-    let setId = await addSet(toDomain(req.body));
+    let setId = await addSet(toDomain(req.body, req.userId));
     res.json({id: setId});
 });
 
 router.put("/:termId", async (req, res, next) => {
-    let setId = await editSet(toDomain(req.body));
+    let setId = await editSet(toDomain(req.body, req.userId));
     res.json({id: setId});
 });
 

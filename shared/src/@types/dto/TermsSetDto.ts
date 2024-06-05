@@ -1,6 +1,9 @@
+import TermsSetAccessDto from "./TermsSetAccessDto";
+
 type TermsSetDto = {
     id: string,
     name: string,
-    termsCount?: number
+    termsCount?: number,
+    access: TermsSetAccessDto[]
 }
 export default TermsSetDto;

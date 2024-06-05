@@ -3,6 +3,7 @@ import {err, ok, Result} from "neverthrow";
 import UserModel, { toDal } from "../models/user"
 import User from "../@types/domain/User";
 import {UserError} from "../@types/UserError";
+import TokenPayload from "../@types/domain/TokenPayload";
 
 export async function authUser(user: User) {
     const userModel = await UserModel.findOne({email: user.email});
@@ -16,7 +17,7 @@ export async function authUser(user: User) {
         return err(new UserError(errorMessage, 400));
     }
 
-    let token = await getToken(user.email);
+    let token = await getToken(user.email, user.id);
     return ok(token);
 }
 
@@ -29,31 +30,33 @@ export async function registerUser(user: User): Promise<Result<string, UserError
     await userModel.save()
 
     try {
-        let token = await getToken(userModel.email);
+        const token = await getToken(userModel.email, userModel.id);
         return ok(token);
     } catch (e) {
         return err(new UserError(`Couldn't generate a token`, 500));
     }
 }
 
-export async function verifyToken(token: string) {
+export async function verifyToken(token: string): Promise<TokenPayload> {
     return new Promise((res, rej) => {
         jwt.verify(token, process.env.JWT_SECRET_KEY!, (err, decoded) => {
             if (err)
                 return rej(err);
 
-            return res(decoded);
+            return res(decoded as TokenPayload);
         });
     });
 }
 
-function getToken(email: string) {
-    return new Promise<string>((res, rej) => {
-        jwt.sign({ email: email }, process.env.JWT_SECRET_KEY!, (err: any, encoded: any) => {
+function getToken(email: string, userId: string): Promise<string> {
+    return new Promise((res, rej) => {
+        const payload = new TokenPayload(userId, email);
+        const asPlainObject = {...payload}
+        jwt.sign(asPlainObject, process.env.JWT_SECRET_KEY!, (err: any, encoded: any) => {
             if (err)
                 return rej(err);
 
-            return res(encoded);
+            return res(encoded as string);
         });
     });
 }

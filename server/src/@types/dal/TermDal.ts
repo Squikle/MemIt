@@ -1,7 +1,7 @@
 import {Types} from "mongoose";
 
 export type TermDal = {
-    id: Types.ObjectId,
+    _id: Types.ObjectId,
     expression?: string,
     expressionImage?: string,
     translation?: string,

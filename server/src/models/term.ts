@@ -18,7 +18,7 @@ export default model;
 
 export const toDomain = (dal: TermDal): Term => {
     return new Term(
-        dal.id.toString(),
+        dal._id.toString(),
         dal.setId.toString(),
         dal.expression,
         dal.expressionImage,
@@ -27,7 +27,7 @@ export const toDomain = (dal: TermDal): Term => {
     );
 }
 export const toDal = (term: Term): HydratedDocument<TermDal> => {
-    return new model({
+    return new model<TermDal>({
         _id: new Types.ObjectId(term.id),
         translation: term.translation,
         expression: term.expression,
