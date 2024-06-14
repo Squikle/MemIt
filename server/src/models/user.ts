@@ -11,7 +11,7 @@ const model = mongoose.model<UserDal>("User", userSchema);
 export default model;
 
 export const toDomain = (dal: UserDal): User => {
-    return new User(dal.email, dal.password);
+    return User.fromExisting(dal._id.toString(), dal.email, dal.password);
 }
 
 export const toDal = (user: User): HydratedDocument<UserDal> => {
