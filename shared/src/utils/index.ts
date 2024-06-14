@@ -1,1 +1,1 @@
-export * from "./generateId"
+export * from "./id"

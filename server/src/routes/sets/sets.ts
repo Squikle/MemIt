@@ -1,12 +1,12 @@
 import express from "express";
-import {addSet, editSet, getAll, removeSet} from "../../controllers/setsController";
+import {addSet, editSet, getByUser, removeSet} from "../../controllers/setsController";
 import TermsSet from "../../@types/domain/TermsSet";
 import {toDomain, toDto} from "./convertor";
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    let sets: TermsSet[] = await getAll();
+    let sets: TermsSet[] = await getByUser(req.userId);
     if (!sets || sets.length <= 0) {
         res.sendStatus(404);
         return;

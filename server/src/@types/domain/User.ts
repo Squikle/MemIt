@@ -6,10 +6,18 @@ class User {
     email: string;
     password: string;
 
-    constructor(email: string, password: string) {
-        this.id = generateId();
+    constructor(id: string, email: string, password: string) {
+        this.id = id;
         this.email = email;
         this.password = this.hashPassword(password);
+    }
+
+    public static fromExisting(id: string, email: string, password: string) {
+        return new User(id, email, password);
+    }
+
+    public static createNew(email: string, password: string) {
+        return new User(generateId(), email, password);
     }
 
     private hashPassword(password: string) {

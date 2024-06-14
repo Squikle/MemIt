@@ -13,6 +13,7 @@ export default model;
 export const toDomain = (dal: UserDal): User => {
     return new User(dal.email, dal.password);
 }
+
 export const toDal = (user: User): HydratedDocument<UserDal> => {
     return new model<UserDal>({
         _id: new Types.ObjectId(user.id),

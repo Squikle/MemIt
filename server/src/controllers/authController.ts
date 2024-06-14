@@ -5,14 +5,14 @@ import User from "../@types/domain/User";
 import {UserError} from "../@types/UserError";
 import TokenPayload from "../@types/domain/TokenPayload";
 
-export async function authUser(user: User) {
-    const userModel = await UserModel.findOne({email: user.email});
+export async function authUser(email: string, password: string) {
+    const userModel = await UserModel.findOne({email: email});
     const errorMessage = `User doesn't exist or the password is incorrect`;
-
     if (!userModel) {
         return err(new UserError(errorMessage, 400));
     }
 
+    const user = User.fromExisting(userModel.id, email, password);
     if (user.password !== userModel.password) {
         return err(new UserError(errorMessage, 400));
     }

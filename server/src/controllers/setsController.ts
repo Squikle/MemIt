@@ -2,16 +2,24 @@ import {getCountBySetId} from "./termsController";
 import TermsSet from "../@types/domain/TermsSet";
 import TermsSetModel, {toDal, toDomain} from "../models/termsSet"
 import TermsSetAccess, { toDal as toAccessDal, toDomain as toAccessDomain } from "../models/termsSetAccess"
+import {toObjectId} from "../../../shared/src/utils";
 
-export async function getAll() {
-    const sets = await TermsSetModel.find();
+export async function getByUser(userId: string) {
+    const userPermissions = await TermsSetAccess.find({userId: toObjectId(userId)});
+    const sets = await TermsSetModel.find({
+        _id: {
+            $in: userPermissions.map(x => x.termsSetId)
+        }
+    });
     const promises = sets.map(async x => {
         const termsCount = await getCountBySetId(x.id); //todo: optimize with single grouping query
-        const access = await TermsSetAccess.find({termsSetId: x.id});
-        const domainAccess = access.map(x => toAccessDomain(x));
-        return toDomain(x, domainAccess, termsCount);
+        const userPermission = userPermissions
+            .filter(x => x.userId.toString() === userId)
+            .find(a => a.termsSetId.toString() === x.id)!;
+        const domainPermission = toAccessDomain(userPermission);
+        return toDomain(x, [domainPermission], termsCount);
     });
-    return await Promise.all(promises);
+    return Promise.all(promises);
 }
 
 export async function addSet(termsSet: TermsSet) {

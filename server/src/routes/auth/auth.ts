@@ -6,7 +6,8 @@ import {toDomain} from "./convertor";
 const router = express.Router();
 
 router.post("/login", async (req, res, next) => {
-    let loginResult = await authUser(toDomain(req.body));
+    const userData = req.body as any as {email: string, password: string};
+    let loginResult = await authUser(userData.email, userData.password);
     if (loginResult.isErr()) {
         return next(loginResult.error);
     }

@@ -3,7 +3,7 @@ import * as termsSetsActions from "./termsSets.ts";
 import {addOrUpdateTerm, getTerm, getTermsBySet, removeTerm as removeTermApi} from "@/api/termsApi.ts";
 import {RootState} from "@/store/types.ts";
 import Term, {toDomain, toDto} from "@/@types/Term.ts";
-import { generateId } from "@shared/utils/generateId";
+import { generateId } from "../../../shared/src/utils/id";
 
 export type TermsState = {
   terms: Term[],

@@ -1,4 +1,6 @@
 import {createContext, ReactNode, useState} from "react";
+import {useDispatch} from "react-redux";
+import {RootActions} from "@/store/rootReducer.ts";
 
 const STORAGE_KEY = "token";
 
@@ -20,6 +22,7 @@ export const AuthContextProvider = ({ children }: Props) => {
     const existingToken = localStorage.getItem(STORAGE_KEY);
     return existingToken || null;
   });
+  const dispatch = useDispatch();
 
   const login = (token: string) => {
     setToken(token);
@@ -29,6 +32,8 @@ export const AuthContextProvider = ({ children }: Props) => {
   const logout = () => {
     setToken(null);
     localStorage.removeItem(STORAGE_KEY);
+    const action: {type: RootActions} = {type: "Logout"};
+    dispatch(action);
   };
 
   const contextValue = {
